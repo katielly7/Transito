@@ -1,0 +1,2255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Trânsito 360° | Dia Nacional do Trânsito</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#07111f;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+/* =========================
+   VARIÁVEIS
+========================= */
+
+:root{
+    --azul:#00a8ff;
+    --azul2:#0066ff;
+    --verde:#00d084;
+    --amarelo:#ffd43b;
+    --vermelho:#ff4757;
+    --fundo:#07111f;
+    --card:#101d2e;
+    --texto:#f5f7fa;
+}
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+
+    background:rgba(5,15,28,.92);
+    backdrop-filter:blur(15px);
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:15px 5%;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:var(--azul);
+}
+
+.logo-icon{
+    font-size:30px;
+}
+
+nav{
+    display:flex;
+    gap:8px;
+}
+
+nav button{
+    background:transparent;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.3s;
+}
+
+nav button:hover,
+nav button.active{
+    background:var(--azul);
+}
+
+/* =========================
+   PÁGINAS
+========================= */
+
+.page{
+    display:none;
+    min-height:100vh;
+    padding-top:90px;
+}
+
+.page.active{
+    display:block;
+}
+
+/* =========================
+   HOME
+========================= */
+
+.hero{
+    min-height:calc(100vh - 90px);
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+
+    padding:40px 20px;
+
+    background:
+    radial-gradient(circle at 50% 20%,rgba(0,168,255,.2),transparent 35%),
+    linear-gradient(180deg,#07111f,#030912);
+}
+
+.hero .icone{
+    font-size:90px;
+    animation:flutuar 3s infinite ease-in-out;
+}
+
+@keyframes flutuar{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-15px)}
+}
+
+.hero h1{
+    font-size:clamp(40px,7vw,85px);
+    margin:15px 0;
+}
+
+.hero h1 span{
+    color:var(--azul);
+}
+
+.hero p{
+    max-width:800px;
+    color:#cbd5e1;
+    font-size:19px;
+    line-height:1.7;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:15px;
+    margin-top:35px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.btn{
+    border:none;
+    padding:15px 25px;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+.btn-primary{
+    background:var(--azul);
+    color:white;
+}
+
+.btn-secondary{
+    background:#18283c;
+    color:white;
+    border:1px solid #31455f;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.container{
+    width:min(1150px,92%);
+    margin:auto;
+}
+
+.section-title{
+    text-align:center;
+    margin:45px 0;
+}
+
+.section-title h2{
+    font-size:40px;
+}
+
+.section-title p{
+    color:#9fb0c4;
+    margin-top:10px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;
+    padding:25px;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-7px);
+    border-color:var(--azul);
+    box-shadow:0 15px 40px rgba(0,168,255,.1);
+}
+
+.card .icon{
+    font-size:40px;
+    margin-bottom:15px;
+}
+
+.card h3{
+    margin-bottom:10px;
+}
+
+.card p{
+    color:#aebdce;
+    line-height:1.6;
+}
+
+/* =========================
+   SOBRE
+========================= */
+
+.about{
+    padding-bottom:70px;
+}
+
+.about-box{
+    background:linear-gradient(135deg,#10243a,#0b1728);
+    border:1px solid #223b57;
+    border-radius:25px;
+    padding:35px;
+    margin-bottom:30px;
+}
+
+.about-box h3{
+    color:var(--azul);
+    margin-bottom:15px;
+    font-size:26px;
+}
+
+.about-box p{
+    color:#d5deea;
+    line-height:1.8;
+    margin-bottom:15px;
+}
+
+.timeline{
+    border-left:3px solid var(--azul);
+    padding-left:25px;
+    margin-top:25px;
+}
+
+.timeline-item{
+    margin-bottom:30px;
+}
+
+.timeline-item strong{
+    color:var(--amarelo);
+}
+
+/* =========================
+   JOGO
+========================= */
+
+.game-page{
+    padding-bottom:50px;
+}
+
+.game-menu{
+    width:min(1100px,95%);
+    margin:auto;
+}
+
+.menu-card{
+    background:#0d1a2a;
+    border:1px solid #263c55;
+    border-radius:25px;
+    padding:30px;
+    margin-bottom:25px;
+}
+
+.menu-card h2{
+    margin-bottom:20px;
+}
+
+.selection{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
+}
+
+.option{
+    background:#14263b;
+    border:2px solid transparent;
+    padding:20px;
+    border-radius:15px;
+    cursor:pointer;
+    text-align:center;
+    transition:.3s;
+}
+
+.option:hover{
+    border-color:var(--azul);
+}
+
+.option.selected{
+    border-color:var(--verde);
+    background:#12392f;
+}
+
+.option .big{
+    font-size:55px;
+    display:block;
+    margin-bottom:10px;
+}
+
+/* =========================
+   ÁREA DO JOGO
+========================= */
+
+.game-wrapper{
+    width:min(1250px,96%);
+    margin:auto;
+    display:none;
+}
+
+.game-wrapper.show{
+    display:block;
+}
+
+.hud{
+    background:#0c1929;
+    border:1px solid #263b53;
+    border-radius:15px 15px 0 0;
+    padding:12px;
+
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+}
+
+.hud-item{
+    background:#14263a;
+    padding:10px;
+    border-radius:10px;
+    text-align:center;
+}
+
+.hud-item small{
+    display:block;
+    color:#8ea3b9;
+    font-size:11px;
+}
+
+.hud-item strong{
+    font-size:18px;
+}
+
+/* =========================
+   CENÁRIO
+========================= */
+
+#gameCanvas{
+    width:100%;
+    height:550px;
+    display:block;
+
+    background:#7ec850;
+
+    border-left:1px solid #263b53;
+    border-right:1px solid #263b53;
+
+    cursor:default;
+}
+
+.controls{
+    background:#0c1929;
+    padding:15px;
+    border-radius:0 0 15px 15px;
+
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.control-btn{
+    width:55px;
+    height:45px;
+    border:none;
+    border-radius:10px;
+    background:#1b3047;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.control-btn:hover{
+    background:var(--azul);
+}
+
+.game-message{
+    text-align:center;
+    margin:15px 0;
+    min-height:25px;
+    color:#dce7f3;
+}
+
+/* =========================
+   MISSÕES
+========================= */
+
+.mission{
+    margin-top:20px;
+    background:#0d1a2a;
+    padding:20px;
+    border-radius:15px;
+    border:1px solid #253c55;
+}
+
+.progress{
+    height:10px;
+    background:#1b2d40;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:10px;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:var(--verde);
+    transition:.4s;
+}
+
+/* =========================
+   RODAPÉ
+========================= */
+
+footer{
+    text-align:center;
+    padding:30px;
+    background:#030914;
+    color:#8192a7;
+    margin-top:50px;
+}
+
+footer span{
+    color:var(--azul);
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media(max-width:800px){
+
+    header{
+        flex-direction:column;
+        gap:10px;
+    }
+
+    nav{
+        overflow-x:auto;
+        width:100%;
+        justify-content:center;
+    }
+
+    .page{
+        padding-top:135px;
+    }
+
+    .hud{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    #gameCanvas{
+        height:420px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     CABEÇALHO
+========================= -->
+
+<header>
+
+    <div class="logo">
+        <div class="logo-icon">🚦</div>
+        <div>
+            Trânsito <span>360°</span>
+        </div>
+    </div>
+
+    <nav>
+        <button class="active" onclick="abrirPagina('inicio',this)">
+            🏠 Início
+        </button>
+
+        <button onclick="abrirPagina('sobre',this)">
+            📚 Sobre
+        </button>
+
+        <button onclick="abrirPagina('jogo',this)">
+            🎮 Jogo
+        </button>
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     INÍCIO
+========================= -->
+
+<section id="inicio" class="page active">
+
+    <div class="hero">
+
+        <div class="icone">🚦</div>
+
+        <h1>
+            Dia Nacional do <span>Trânsito</span>
+        </h1>
+
+        <p>
+            Uma experiência interativa criada para aprender,
+            explorar e entender como pequenas atitudes podem
+            transformar o trânsito em um lugar mais seguro para todos.
+        </p>
+
+        <div class="hero-buttons">
+
+            <button class="btn btn-primary"
+                    onclick="abrirPagina('jogo')">
+                🎮 Jogar agora
+            </button>
+
+            <button class="btn btn-secondary"
+                    onclick="abrirPagina('sobre')">
+                📖 Conhecer a história
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Por que o trânsito importa?</h2>
+            <p>Todos fazemos parte dele.</p>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="icon">🚶</div>
+                <h3>Pedestres</h3>
+                <p>
+                    Respeitar a faixa de pedestres e os sinais
+                    ajuda a tornar as ruas mais seguras.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🚗</div>
+                <h3>Motoristas</h3>
+                <p>
+                    Atenção, respeito aos limites de velocidade
+                    e responsabilidade fazem diferença.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🏍️</div>
+                <h3>Motociclistas</h3>
+                <p>
+                    Equipamentos de segurança e atenção são
+                    fundamentais durante os deslocamentos.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🚲</div>
+                <h3>Ciclistas</h3>
+                <p>
+                    Bicicletas também fazem parte do trânsito
+                    e precisam ser respeitadas.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SOBRE
+========================= -->
+
+<section id="sobre" class="page about">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>📚 Dia Nacional do Trânsito</h2>
+
+            <p>
+                Conheça o significado dessa data.
+            </p>
+
+        </div>
+
+
+        <div class="about-box">
+
+            <h3>🚦 O que é o Dia Nacional do Trânsito?</h3>
+
+            <p>
+                O Dia Nacional do Trânsito é lembrado em
+                <strong>25 de setembro</strong> e faz parte da
+                programação da Semana Nacional de Trânsito.
+            </p>
+
+            <p>
+                A data busca chamar a atenção da sociedade para
+                a importância de atitudes responsáveis no trânsito,
+                envolvendo motoristas, motociclistas, ciclistas
+                e pedestres.
+            </p>
+
+            <p>
+                Mais do que uma data comemorativa, o momento serve
+                para incentivar a educação, o respeito às regras,
+                a convivência entre os diferentes usuários das vias
+                e a prevenção de acidentes.
+            </p>
+
+        </div>
+
+
+        <div class="about-box">
+
+            <h3>📅 Por que 25 de setembro?</h3>
+
+            <p>
+                O dia 25 de setembro está relacionado ao Código de
+                Trânsito Brasileiro e é utilizado nacionalmente
+                para reforçar campanhas de educação e conscientização
+                sobre segurança no trânsito.
+            </p>
+
+        </div>
+
+
+        <div class="about-box">
+
+            <h3>🛣️ O trânsito é de todos</h3>
+
+            <p>
+                O trânsito não é formado apenas por carros.
+                Pessoas caminham, pedalam, utilizam motocicletas,
+                ônibus, caminhões e diversos outros meios de
+                transporte.
+            </p>
+
+            <p>
+                Por isso, atitudes como respeitar a sinalização,
+                atravessar em locais apropriados, manter atenção
+                e respeitar os demais participantes são importantes
+                para uma convivência mais segura.
+            </p>
+
+        </div>
+
+
+        <div class="about-box">
+
+            <h3>⏳ Uma pequena linha do tempo</h3>
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <strong>25 de setembro</strong>
+                    <p>
+                        Dia Nacional do Trânsito.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <strong>Semana Nacional de Trânsito</strong>
+                    <p>
+                        Período dedicado a campanhas e ações
+                        de educação para o trânsito.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <strong>Educação</strong>
+                    <p>
+                        Conhecimento e conscientização ajudam
+                        a construir hábitos mais responsáveis.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     JOGO
+========================= -->
+
+<section id="jogo" class="page game-page">
+
+    <div class="game-menu" id="menuJogo">
+
+        <div class="section-title">
+
+            <h2>🎮 Trânsito 360°</h2>
+
+            <p>
+                Escolha seu personagem e veículo para começar.
+            </p>
+
+        </div>
+
+
+        <div class="menu-card">
+
+            <h2>👤 Escolha seu personagem</h2>
+
+            <div class="selection">
+
+                <div class="option"
+                     onclick="selecionarPersonagem('Homem',this)">
+
+                    <span class="big">👨</span>
+
+                    <strong>HOMEM</strong>
+
+                </div>
+
+                <div class="option"
+                     onclick="selecionarPersonagem('Mulher',this)">
+
+                    <span class="big">👩</span>
+
+                    <strong>MULHER</strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="menu-card">
+
+            <h2>🚘 Escolha seu veículo</h2>
+
+            <div class="selection">
+
+                <div class="option"
+                     onclick="selecionarVeiculo('Carro',this)">
+
+                    <span class="big">🚗</span>
+
+                    <strong>CARRO</strong>
+
+                    <small>Condução equilibrada</small>
+
+                </div>
+
+
+                <div class="option"
+                     onclick="selecionarVeiculo('Moto',this)">
+
+                    <span class="big">🏍️</span>
+
+                    <strong>MOTO</strong>
+
+                    <small>Mais rápida e ágil</small>
+
+                </div>
+
+
+                <div class="option"
+                     onclick="selecionarVeiculo('Caminhão',this)">
+
+                    <span class="big">🚚</span>
+
+                    <strong>CAMINHÃO</strong>
+
+                    <small>Grande e pesado</small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div style="text-align:center">
+
+            <button class="btn btn-primary"
+                    onclick="iniciarJogo()">
+
+                🚦 INICIAR TRÂNSITO
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ÁREA DO JOGO -->
+
+    <div class="game-wrapper" id="gameWrapper">
+
+        <div class="hud">
+
+            <div class="hud-item">
+                <small>PERSONAGEM</small>
+                <strong id="hudPersonagem">---</strong>
+            </div>
+
+            <div class="hud-item">
+                <small>VEÍCULO</small>
+                <strong id="hudVeiculo">---</strong>
+            </div>
+
+            <div class="hud-item">
+                <small>COMBUSTÍVEL</small>
+                <strong id="fuel">100%</strong>
+            </div>
+
+            <div class="hud-item">
+                <small>CARTEIRA</small>
+                <strong id="points">20 pts</strong>
+            </div>
+
+            <div class="hud-item">
+                <small>PONTUAÇÃO</small>
+                <strong id="score">0</strong>
+            </div>
+
+        </div>
+
+
+        <canvas id="gameCanvas"></canvas>
+
+
+        <div class="game-message" id="message">
+
+            Use ← → ou A/D para controlar o veículo.
+
+        </div>
+
+
+        <div class="controls">
+
+            <button class="control-btn"
+                    onmousedown="tecla('left')"
+                    onmouseup="soltar()">
+                ◀
+            </button>
+
+            <button class="control-btn"
+                    onclick="abastecer()">
+                ⛽
+            </button>
+
+            <button class="control-btn"
+                    onmousedown="tecla('right')"
+                    onmouseup="soltar()">
+                ▶
+            </button>
+
+            <button class="control-btn"
+                    onclick="pararJogo()">
+                ⏹
+            </button>
+
+        </div>
+
+
+        <div class="mission">
+
+            <strong>🎯 Missão:</strong>
+
+            <span id="missionText">
+                Percorra a cidade sem cometer infrações.
+            </span>
+
+            <div class="progress">
+
+                <div class="progress-bar"
+                     id="progressBar"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    🚦 Projeto escolar sobre o
+    <span>Dia Nacional do Trânsito</span>
+
+    <br><br>
+
+    Educação • Respeito • Segurança
+
+</footer>
+
+
+<script>
+
+/* =========================================
+   NAVEGAÇÃO
+========================================= */
+
+function abrirPagina(id,botao){
+
+    document.querySelectorAll('.page')
+        .forEach(p=>p.classList.remove('active'));
+
+    document.getElementById(id)
+        .classList.add('active');
+
+    if(botao){
+
+        document.querySelectorAll('nav button')
+            .forEach(b=>b.classList.remove('active'));
+
+        botao.classList.add('active');
+
+    }
+
+    window.scrollTo({
+        top:0,
+        behavior:'smooth'
+    });
+
+}
+
+
+/* =========================================
+   CONFIGURAÇÕES DO JOGADOR
+========================================= */
+
+let personagem = null;
+let veiculo = null;
+
+function selecionarPersonagem(nome,elemento){
+
+    personagem = nome;
+
+    document.querySelectorAll(
+        '#menuJogo .option'
+    ).forEach(el=>{
+        if(el.parentElement.parentElement
+            .querySelector('h2')
+            ?.innerText.includes('personagem')){
+
+            el.classList.remove('selected');
+        }
+    });
+
+    elemento.classList.add('selected');
+}
+
+
+function selecionarVeiculo(nome,elemento){
+
+    veiculo = nome;
+
+    const cards =
+        elemento.parentElement.querySelectorAll('.option');
+
+    cards.forEach(c=>c.classList.remove('selected'));
+
+    elemento.classList.add('selected');
+}
+
+
+/* =========================================
+   CANVAS
+========================================= */
+
+const canvas =
+    document.getElementById("gameCanvas");
+
+const ctx =
+    canvas.getContext("2d");
+
+let W,H;
+
+function ajustarCanvas(){
+
+    const rect =
+        canvas.getBoundingClientRect();
+
+    const ratio =
+        window.devicePixelRatio || 1;
+
+    W = rect.width;
+    H = rect.height;
+
+    canvas.width =
+        W * ratio;
+
+    canvas.height =
+        H * ratio;
+
+    ctx.setTransform(
+        ratio,0,0,ratio,0,0
+    );
+}
+
+window.addEventListener(
+    "resize",
+    ajustarCanvas
+);
+
+
+/* =========================================
+   JOGADOR
+========================================= */
+
+let jogador = {
+
+    x:200,
+    y:0,
+
+    largura:80,
+    altura:38,
+
+    velocidade:0,
+
+    maxVelocidade:5
+
+};
+
+
+/* =========================================
+   ESTADO DO JOGO
+========================================= */
+
+let jogoRodando=false;
+
+let teclaEsquerda=false;
+let teclaDireita=false;
+
+let fuel=100;
+let pontos=20;
+let score=0;
+
+let distancia=0;
+
+let mundoX=0;
+
+let semaforoTempo=0;
+
+
+/* =========================================
+   OUTROS VEÍCULOS
+========================================= */
+
+let carros=[];
+
+function criarCarros(){
+
+    carros=[];
+
+    const cores=[
+        "#e74c3c",
+        "#3498db",
+        "#f1c40f",
+        "#9b59b6",
+        "#2ecc71",
+        "#ecf0f1",
+        "#34495e"
+    ];
+
+    for(let i=0;i<7;i++){
+
+        carros.push({
+
+            x:350+i*260+Math.random()*100,
+
+            lane:
+                Math.random()>0.5 ? 0 : 1,
+
+            velocidade:
+                1.5+Math.random()*1.5,
+
+            largura:78,
+
+            altura:36,
+
+            cor:
+                cores[
+                    Math.floor(
+                        Math.random()*cores.length
+                    )
+                ]
+
+        });
+
+    }
+
+}
+
+
+/* =========================================
+   INICIAR
+========================================= */
+
+function iniciarJogo(){
+
+    if(!personagem){
+
+        alert(
+            "Escolha um personagem antes de começar!"
+        );
+
+        return;
+    }
+
+    if(!veiculo){
+
+        alert(
+            "Escolha um veículo antes de começar!"
+        );
+
+        return;
+    }
+
+    document.getElementById(
+        "menuJogo"
+    ).style.display="none";
+
+    document.getElementById(
+        "gameWrapper"
+    ).classList.add("show");
+
+    document.getElementById(
+        "hudPersonagem"
+    ).innerText=personagem;
+
+    document.getElementById(
+        "hudVeiculo"
+    ).innerText=veiculo;
+
+    ajustarCanvas();
+
+    jogador.x=W/2-40;
+
+    jogador.y=H-115;
+
+    if(veiculo==="Moto"){
+
+        jogador.largura=55;
+        jogador.altura=30;
+        jogador.maxVelocidade=6;
+
+    }else if(veiculo==="Caminhão"){
+
+        jogador.largura=105;
+        jogador.altura=45;
+        jogador.maxVelocidade=3.8;
+
+    }else{
+
+        jogador.largura=80;
+        jogador.altura=38;
+        jogador.maxVelocidade=5;
+
+    }
+
+    fuel=100;
+    pontos=20;
+    score=0;
+    distancia=0;
+
+    criarCarros();
+
+    jogoRodando=true;
+
+    document.getElementById(
+        "message"
+    ).innerText=
+        "🚦 Dirija com responsabilidade!";
+
+    requestAnimationFrame(loop);
+
+}
+
+
+/* =========================================
+   DESENHAR ESTRADA
+========================================= */
+
+function desenharCenario(){
+
+    /* céu */
+
+    const gradiente =
+        ctx.createLinearGradient(
+            0,0,0,H
+        );
+
+    gradiente.addColorStop(
+        0,
+        "#8bd5ff"
+    );
+
+    gradiente.addColorStop(
+        1,
+        "#d7f3ff"
+    );
+
+    ctx.fillStyle=gradiente;
+
+    ctx.fillRect(
+        0,0,W,H
+    );
+
+
+    /* prédios */
+
+    for(let i=0;i<12;i++){
+
+        let x=
+            (i*150-mundoX*.25)
+            % (W+200);
+
+        if(x<-150)x+=W+200;
+
+        let altura=
+            70+(i%4)*30;
+
+        ctx.fillStyle=
+            i%2===0
+            ? "#52657a"
+            : "#64788e";
+
+        ctx.fillRect(
+            x,
+            100-altura,
+            100,
+            altura
+        );
+
+        /* janelas */
+
+        ctx.fillStyle="#ffe66d";
+
+        for(let y=115-altura;y<90;y+=22){
+
+            for(let xx=x+12;xx<x+90;xx+=25){
+
+                ctx.fillRect(
+                    xx,
+                    y,
+                    10,
+                    8
+                );
+
+            }
+
+        }
+
+    }
+
+
+    /* árvores */
+
+    for(let i=0;i<15;i++){
+
+        let x=
+            (i*115-mundoX*.6)
+            %(W+150);
+
+        if(x<-100)x+=W+150;
+
+        ctx.fillStyle="#6b4528";
+
+        ctx.fillRect(
+            x+25,
+            220,
+            10,
+            55
+        );
+
+        ctx.fillStyle="#238636";
+
+        ctx.beginPath();
+
+        ctx.arc(
+            x+30,
+            205,
+            28,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fill();
+
+    }
+
+
+    /* grama */
+
+    ctx.fillStyle="#63ad42";
+
+    ctx.fillRect(
+        0,
+        280,
+        W,
+        H-280
+    );
+
+
+    /* estrada */
+
+    const estradaY=330;
+    const estradaH=170;
+
+    ctx.fillStyle="#30343b";
+
+    ctx.fillRect(
+        0,
+        estradaY,
+        W,
+        estradaH
+    );
+
+
+    /* borda */
+
+    ctx.fillStyle="#f5f5f5";
+
+    ctx.fillRect(
+        0,
+        estradaY,
+        W,
+        5
+    );
+
+    ctx.fillRect(
+        0,
+        estradaY+estradaH-5,
+        W,
+        5
+    );
+
+
+    /* faixas */
+
+    ctx.strokeStyle="#f4f4f4";
+
+    ctx.lineWidth=5;
+
+    ctx.setLineDash([
+        45,
+        35
+    ]);
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        -mundoX%80,
+        estradaY+estradaH/2
+    );
+
+    ctx.lineTo(
+        W,
+        estradaY+estradaH/2
+    );
+
+    ctx.stroke();
+
+    ctx.setLineDash([]);
+
+
+    /* faixa de pedestres */
+
+    let faixaX=
+        1200-mundoX%1500;
+
+    for(let i=0;i<7;i++){
+
+        ctx.fillStyle="#ffffff";
+
+        ctx.fillRect(
+            faixaX+i*18,
+            estradaY+10,
+            10,
+            150
+        );
+
+    }
+
+
+    /* posto */
+
+    let postoX=
+        850-mundoX%1800;
+
+    if(postoX>-150 && postoX<W+150){
+
+        ctx.fillStyle="#f1f1f1";
+
+        ctx.fillRect(
+            postoX,
+            215,
+            120,
+            65
+        );
+
+        ctx.fillStyle="#e63946";
+
+        ctx.fillRect(
+            postoX,
+            215,
+            120,
+            15
+        );
+
+        ctx.fillStyle="#222";
+
+        ctx.font="bold 17px Arial";
+
+        ctx.fillText(
+            "⛽ POSTO",
+            postoX+20,
+            255
+        );
+
+    }
+
+
+    /* semáforo */
+
+    desenharSemaforo();
+
+}
+
+
+/* =========================================
+   SEMÁFORO
+========================================= */
+
+function desenharSemaforo(){
+
+    let x=
+        550-mundoX%1000;
+
+    if(x<-100)x+=1000;
+
+    ctx.fillStyle="#333";
+
+    ctx.fillRect(
+        x,
+        205,
+        55,
+        115
+    );
+
+    ctx.fillStyle="#111";
+
+    ctx.fillRect(
+        x+20,
+        320,
+        15,
+        50
+    );
+
+    let tempo=
+        Math.floor(Date.now()/1000)%9;
+
+    let vermelho=
+        tempo<4;
+
+    let amarelo=
+        tempo>=4 && tempo<6;
+
+    let verde=
+        tempo>=6;
+
+    ctx.fillStyle=
+        vermelho ? "#ff3b30" : "#4d1d1d";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x+27,
+        230,
+        13,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+
+    ctx.fillStyle=
+        amarelo ? "#ffd60a" : "#4d4314";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x+27,
+        260,
+        13,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+
+    ctx.fillStyle=
+        verde ? "#30d158" : "#163d20";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x+27,
+        290,
+        13,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+}
+
+
+/* =========================================
+   DESENHAR CARRO
+========================================= */
+
+function desenharVeiculo(
+    x,
+    y,
+    largura,
+    altura,
+    cor,
+    principal=false
+){
+
+    ctx.save();
+
+    /* sombra */
+
+    ctx.fillStyle=
+        "rgba(0,0,0,.25)";
+
+    ctx.beginPath();
+
+    ctx.ellipse(
+        x+largura/2,
+        y+altura+7,
+        largura/2,
+        6,
+        0,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+
+    /* corpo */
+
+    ctx.fillStyle=cor;
+
+    ctx.beginPath();
+
+    ctx.roundRect(
+        x,
+        y+10,
+        largura,
+        altura-10,
+        8
+    );
+
+    ctx.fill();
+
+
+    /* teto */
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        x+largura*.2,
+        y+10
+    );
+
+    ctx.lineTo(
+        x+largura*.34,
+        y-4
+    );
+
+    ctx.lineTo(
+        x+largura*.72,
+        y-4
+    );
+
+    ctx.lineTo(
+        x+largura*.87,
+        y+10
+    );
+
+    ctx.closePath();
+
+    ctx.fill();
+
+
+    /* vidros */
+
+    ctx.fillStyle="#bde7ff";
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        x+largura*.35,
+        y+2
+    );
+
+    ctx.lineTo(
+        x+largura*.49,
+        y+2
+    );
+
+    ctx.lineTo(
+        x+largura*.49,
+        y+9
+    );
+
+    ctx.lineTo(
+        x+largura*.30,
+        y+9
+    );
+
+    ctx.closePath();
+
+    ctx.fill();
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        x+largura*.52,
+        y+2
+    );
+
+    ctx.lineTo(
+        x+largura*.69,
+        y+2
+    );
+
+    ctx.lineTo(
+        x+largura*.79,
+        y+9
+    );
+
+    ctx.lineTo(
+        x+largura*.52,
+        y+9
+    );
+
+    ctx.closePath();
+
+    ctx.fill();
+
+
+    /* rodas */
+
+    ctx.fillStyle="#111";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x+largura*.23,
+        y+altura,
+        9,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x+largura*.78,
+        y+altura,
+        9,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+
+    /* faróis */
+
+    ctx.fillStyle="#fff";
+
+    ctx.fillRect(
+        x+largura-3,
+        y+16,
+        4,
+        7
+    );
+
+
+    ctx.fillStyle="#ff3030";
+
+    ctx.fillRect(
+        x,
+        y+16,
+        4,
+        7
+    );
+
+
+    if(principal){
+
+        ctx.strokeStyle="#ffffff";
+
+        ctx.lineWidth=2;
+
+        ctx.stroke();
+
+    }
+
+    ctx.restore();
+
+}
+
+
+/* =========================================
+   DESENHAR OUTROS CARROS
+========================================= */
+
+function desenharCarros(){
+
+    carros.forEach(c=>{
+
+        let screenX=
+            c.x-mundoX;
+
+        if(
+            screenX>-150 &&
+            screenX<W+150
+        ){
+
+            let laneY=
+                c.lane===0
+                ? 350
+                : 425;
+
+            desenharVeiculo(
+                screenX,
+                laneY,
+                c.largura,
+                c.altura,
+                c.cor
+            );
+
+        }
+
+    });
+
+}
+
+
+/* =========================================
+   COLISÃO
+========================================= */
+
+function colidiu(a,b){
+
+    return !(
+        a.x+a.largura < b.x ||
+        a.x > b.x+b.largura ||
+        a.y+a.altura < b.y ||
+        a.y > b.y+b.altura
+    );
+
+}
+
+
+/* =========================================
+   CONTROLES
+========================================= */
+
+function tecla(direcao){
+
+    if(direcao==="left")
+        teclaEsquerda=true;
+
+    if(direcao==="right")
+        teclaDireita=true;
+
+}
+
+function soltar(){
+
+    teclaEsquerda=false;
+    teclaDireita=false;
+
+}
+
+
+/* teclado */
+
+document.addEventListener(
+    "keydown",
+    e=>{
+
+        if(e.key==="ArrowLeft" || e.key.toLowerCase()==="a")
+            teclaEsquerda=true;
+
+        if(e.key==="ArrowRight" || e.key.toLowerCase()==="d")
+            teclaDireita=true;
+
+    }
+);
+
+
+document.addEventListener(
+    "keyup",
+    e=>{
+
+        if(e.key==="ArrowLeft" || e.key.toLowerCase()==="a")
+            teclaEsquerda=false;
+
+        if(e.key==="ArrowRight" || e.key.toLowerCase()==="d")
+            teclaDireita=false;
+
+    }
+);
+
+
+/* =========================================
+   ABASTECER
+========================================= */
+
+function abastecer(){
+
+    if(!jogoRodando)
+        return;
+
+    fuel=Math.min(
+        100,
+        fuel+30
+    );
+
+    score+=20;
+
+    document.getElementById(
+        "message"
+    ).innerText=
+        "⛽ Combustível abastecido! +20 pontos.";
+
+}
+
+
+/* =========================================
+   GAME LOOP
+========================================= */
+
+function loop(){
+
+    if(!jogoRodando)
+        return;
+
+    ctx.clearRect(
+        0,
+        0,
+        W,
+        H
+    );
+
+    desenharCenario();
+
+    atualizar();
+
+    desenharCarros();
+
+    desenharJogador();
+
+    atualizarHUD();
+
+    requestAnimationFrame(loop);
+
+}
+
+
+/* =========================================
+   ATUALIZAÇÃO
+========================================= */
+
+function atualizar(){
+
+    if(teclaEsquerda){
+
+        jogador.x-=5;
+
+    }
+
+    if(teclaDireita){
+
+        jogador.x+=5;
+
+    }
+
+
+    /* limites */
+
+    jogador.x=
+        Math.max(
+            10,
+            Math.min(
+                W-jogador.largura-10,
+                jogador.x
+            )
+        );
+
+
+    /* movimento do mundo */
+
+    mundoX+=2;
+
+    distancia+=1;
+
+
+    /* combustível */
+
+    fuel-=0.008;
+
+
+    if(fuel<=0){
+
+        fuel=0;
+
+        jogoRodando=false;
+
+        document.getElementById(
+            "message"
+        ).innerText=
+            "⛽ Você ficou sem combustível!";
+
+        return;
+
+    }
+
+
+    /* carros */
+
+    carros.forEach(c=>{
+
+        c.x+=c.velocidade;
+
+        /*
+         * Se o carro saiu muito para frente,
+         * ele volta para trás.
+         */
+
+        if(
+            c.x-mundoX >
+            W+250
+        ){
+
+            c.x=
+                mundoX-
+                300-
+                Math.random()*400;
+
+            c.lane=
+                Math.random()>0.5
+                ? 0
+                : 1;
+
+        }
+
+    });
+
+
+    /* evitar carros sobrepostos */
+
+    for(let i=0;i<carros.length;i++){
+
+        for(
+            let j=i+1;
+            j<carros.length;
+            j++
+        ){
+
+            const a=carros[i];
+            const b=carros[j];
+
+            if(
+                Math.abs(a.x-b.x)<90 &&
+                a.lane===b.lane
+            ){
+
+                if(a.x>b.x)
+                    a.x+=100;
+                else
+                    b.x+=100;
+
+            }
+
+        }
+
+    }
+
+
+    /* infrações */
+
+    detectarSemaforo();
+
+}
+
+
+/* =========================================
+   SEMÁFORO / INFRAÇÃO
+========================================= */
+
+function detectarSemaforo(){
+
+    let tempo=
+        Math.floor(Date.now()/1000)%9;
+
+    let vermelho=
+        tempo<4;
+
+    let semaforoMundo=
+        550-mundoX%1000;
+
+    let jogadorMundo=
+        mundoX+jogador.x;
+
+
+    let distanciaSemaforo=
+        Math.abs(
+            jogadorMundo-semaforoMundo
+        );
+
+
+    if(
+        vermelho &&
+        distanciaSemaforo<25 &&
+        Math.random()<0.008
+    ){
+
+        pontos=Math.max(
+            0,
+            pontos-2
+        );
+
+        score=Math.max(
+            0,
+            score-10
+        );
+
+        document.getElementById(
+            "message"
+        ).innerText=
+            "🛑 Infração! Você avançou o sinal vermelho.";
+
+    }
+
+}
+
+
+/* =========================================
+   DESENHAR JOGADOR
+========================================= */
+
+function desenharJogador(){
+
+    let cor="#0077ff";
+
+    if(veiculo==="Moto")
+        cor="#ff4757";
+
+    if(veiculo==="Caminhão")
+        cor="#ffa502";
+
+    desenharVeiculo(
+        jogador.x,
+        jogador.y,
+        jogador.largura,
+        jogador.altura,
+        cor,
+        true
+    );
+
+}
+
+
+/* =========================================
+   HUD
+========================================= */
+
+function atualizarHUD(){
+
+    document.getElementById(
+        "fuel"
+    ).innerText=
+        Math.round(fuel)+"%";
+
+    document.getElementById(
+        "points"
+    ).innerText=
+        pontos+" pts";
+
+    document.getElementById(
+        "score"
+    ).innerText=
+        score;
+
+
+    let progresso=
+        Math.min(
+            100,
+            (distancia/20)
+        );
+
+    document.getElementById(
+        "progressBar"
+    ).style.width=
+        progresso+"%";
+
+
+    if(
+        progresso>=100 &&
+        jogoRodando
+    ){
+
+        document.getElementById(
+            "missionText"
+        ).innerText=
+            "🏆 Missão concluída! Você dirigiu com responsabilidade.";
+
+        score+=100;
+
+    }
+
+}
+
+
+/* =========================================
+   PARAR
+========================================= */
+
+function pararJogo(){
+
+    jogoRodando=false;
+
+    document.getElementById(
+        "gameWrapper"
+    ).classList.remove("show");
+
+    document.getElementById(
+        "menuJogo"
+    ).style.display="block";
+
+    personagem=null;
+    veiculo=null;
+
+    document.querySelectorAll(
+        "#menuJogo .option"
+    ).forEach(o=>{
+        o.classList.remove("selected");
+    });
+
+}
+
+
+/* =========================================
+   INICIALIZAÇÃO
+========================================= */
+
+ajustarCanvas();
+
+</script>
+
+</body>
+</html>
