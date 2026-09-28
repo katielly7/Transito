@@ -3,2607 +3,605 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Faixa Livre • Mundo Aberto</title>
-
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-:root{
-    --amarelo:#ffd000;
-    --azul:#0877ff;
-    --azul2:#071b35;
-    --escuro:#07111f;
-    --painel:#101d2d;
-    --painel2:#16283d;
-    --branco:#f5f7fa;
-    --verde:#19d47b;
-    --vermelho:#ff4757;
-    --cinza:#9ba8b8;
-}
-
-body{
-    background:
-        radial-gradient(circle at top,#12365d 0,#07111f 45%,#030811 100%);
-    color:var(--branco);
-    font-family:Arial,Helvetica,sans-serif;
-    min-height:100vh;
-}
-
-button{
-    border:0;
-    cursor:pointer;
-}
-
-header{
-    background:linear-gradient(135deg,#06101d,#102c4d);
-    border-bottom:3px solid var(--amarelo);
-    padding:18px 25px;
-    position:sticky;
-    top:0;
-    z-index:50;
-    box-shadow:0 5px 25px #0008;
-}
-
-.header{
-    max-width:1250px;
-    margin:auto;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:20px;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:13px;
-}
-
-.logoIcon{
-    width:52px;
-    height:52px;
-    border-radius:14px;
-    background:var(--amarelo);
-    color:#111;
-    display:grid;
-    place-items:center;
-    font-size:27px;
-    font-weight:bold;
-    transform:rotate(-3deg);
-}
-
-.logo h1{
-    font-size:25px;
-}
-
-.logo p{
-    color:#9fb4ca;
-    font-size:13px;
-    margin-top:3px;
-}
-
-.money{
-    background:#07111f;
-    border:1px solid #284b6d;
-    padding:10px 17px;
-    border-radius:12px;
-    font-weight:bold;
-    color:var(--amarelo);
-}
-
-#app{
-    max-width:1250px;
-    margin:20px auto 60px;
-    padding:0 15px;
-}
-
-.menu{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    gap:8px;
-    margin-bottom:18px;
-}
-
-.menu button{
-    background:var(--painel);
-    color:#aebed0;
-    border:1px solid #203a55;
-    border-radius:10px;
-    padding:12px 7px;
-    font-weight:bold;
-    transition:.2s;
-}
-
-.menu button:hover,
-.menu button.active{
-    background:var(--amarelo);
-    color:#111;
-    transform:translateY(-2px);
-}
-
-.page{
-    display:none;
-}
-
-.page.active{
-    display:block;
-}
-
-.panel{
-    background:linear-gradient(145deg,#101e2e,#0a1523);
-    border:1px solid #23405c;
-    border-radius:18px;
-    padding:22px;
-    box-shadow:0 15px 50px #0007;
-}
-
-.title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:18px;
-    gap:10px;
-}
-
-.title h2{
-    font-size:28px;
-}
-
-.title span{
-    color:var(--amarelo);
-    font-weight:bold;
-}
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
-    margin-bottom:15px;
-}
-
-.stat{
-    background:#0b1827;
-    border:1px solid #23405c;
-    padding:15px;
-    border-radius:13px;
-}
-
-.stat small{
-    color:var(--cinza);
-}
-
-.stat strong{
-    display:block;
-    margin-top:5px;
-    color:var(--amarelo);
-    font-size:23px;
-}
-
-canvas{
-    width:100%;
-    max-width:1100px;
-    display:block;
-    margin:auto;
-    background:#263b2d;
-    border:4px solid #182b3e;
-    border-radius:15px;
-    box-shadow:0 10px 40px #0008;
-}
-
-.controls{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:9px;
-    margin-top:13px;
-}
-
-.btn{
-    background:var(--amarelo);
-    color:#111;
-    padding:11px 18px;
-    border-radius:9px;
-    font-weight:bold;
-    transition:.2s;
-}
-
-.btn:hover{
-    transform:translateY(-2px);
-    filter:brightness(1.08);
-}
-
-.btn.blue{
-    background:var(--azul);
-    color:white;
-}
-
-.btn.dark{
-    background:#172b40;
-    color:white;
-    border:1px solid #31506d;
-}
-
-.btn.green{
-    background:var(--verde);
-    color:#04150d;
-}
-
-.btn.red{
-    background:var(--vermelho);
-    color:white;
-}
-
-.info{
-    margin-top:15px;
-    background:#0b1827;
-    padding:15px;
-    border-radius:12px;
-    border-left:4px solid var(--amarelo);
-    color:#bdc9d5;
-    line-height:1.6;
-}
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-    gap:14px;
-}
-
-.card{
-    background:linear-gradient(145deg,#15283d,#0b1725);
-    border:1px solid #28445f;
-    border-radius:15px;
-    padding:16px;
-    position:relative;
-    overflow:hidden;
-}
-
-.card:hover{
-    border-color:var(--amarelo);
-}
-
-.vehicle{
-    height:130px;
-    display:grid;
-    place-items:center;
-    background:
-        radial-gradient(circle,#263f58,#091523);
-    border-radius:11px;
-    margin-bottom:12px;
-    font-size:70px;
-}
-
-.card h3{
-    margin-bottom:5px;
-}
-
-.card p{
-    color:#94a7b9;
-    font-size:13px;
-    margin:4px 0;
-}
-
-.price{
-    color:var(--amarelo)!important;
-    font-size:19px!important;
-    font-weight:bold;
-    margin:10px 0!important;
-}
-
-.lock{
-    color:#ff9d4d!important;
-}
-
-.bar{
-    height:8px;
-    background:#07101b;
-    border-radius:20px;
-    overflow:hidden;
-    margin:5px 0 9px;
-}
-
-.bar i{
-    display:block;
-    height:100%;
-    background:linear-gradient(90deg,var(--azul),var(--amarelo));
-    border-radius:20px;
-}
-
-.mission{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-    background:#0c1928;
-    border:1px solid #23415e;
-    padding:16px;
-    border-radius:13px;
-    margin-bottom:10px;
-}
-
-.mission h3{
-    margin-bottom:4px;
-}
-
-.mission p{
-    color:#9caec0;
-    font-size:14px;
-}
-
-.reward{
-    color:var(--verde);
-    font-weight:bold;
-    margin-top:5px;
-}
-
-.raceBox{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
-}
-
-.playerBox{
-    background:#0b1827;
-    border:1px solid #28445f;
-    border-radius:15px;
-    padding:20px;
-    text-align:center;
-}
-
-.playerIcon{
-    font-size:65px;
-    margin:10px;
-}
-
-.playerBox h3{
-    color:var(--amarelo);
-}
-
-.bet{
-    display:flex;
-    gap:8px;
-    justify-content:center;
-    flex-wrap:wrap;
-    margin-top:12px;
-}
-
-.bet button{
-    background:#172b40;
-    color:white;
-    border:1px solid #35516c;
-    border-radius:8px;
-    padding:10px 15px;
-}
-
-.bet button:hover{
-    background:var(--amarelo);
-    color:#111;
-}
-
-.selected{
-    outline:3px solid var(--amarelo);
-}
-
-#raceCanvas{
-    display:none;
-}
-
-.result{
-    text-align:center;
-    padding:25px;
-    background:#0a1725;
-    border-radius:15px;
-    margin-top:15px;
-}
-
-.result h2{
-    font-size:36px;
-    color:var(--amarelo);
-    margin-bottom:10px;
-}
-
-.upgrades{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:12px;
-}
-
-.upgrade{
-    background:#0c1928;
-    border:1px solid #294660;
-    border-radius:12px;
-    padding:15px;
-}
-
-.upgradeTop{
-    display:flex;
-    justify-content:space-between;
-}
-
-.level{
-    color:var(--amarelo);
-}
-
-.footer{
-    text-align:center;
-    margin-top:30px;
-    color:#75879a;
-    font-size:13px;
-}
-
-@media(max-width:850px){
-    .menu{
-        grid-template-columns:repeat(4,1fr);
-    }
-
-    .stats{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .raceBox{
-        grid-template-columns:1fr;
-    }
-}
-
-@media(max-width:550px){
-    .header{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
-    .menu{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .stats{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .title{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--y:#ffd000;--b:#0877ff;--g:#19d47b;--r:#ff4757;--c:#9ba8b8}
+body{background:radial-gradient(circle at top,#12365d 0,#07111f 45%,#030811 100%);color:#f5f7fa;font-family:Arial,Helvetica,sans-serif;min-height:100vh}
+button,select{cursor:pointer;border:0;font-family:inherit;font-size:14px}
+header{background:linear-gradient(135deg,#06101d,#102c4d);border-bottom:3px solid var(--y);padding:14px 22px;position:sticky;top:0;z-index:50}
+.hd{max-width:1150px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:15px}
+.logo{display:flex;align-items:center;gap:12px}
+.logoI{width:48px;height:48px;border-radius:13px;background:var(--y);display:grid;place-items:center;font-size:26px;transform:rotate(-3deg)}
+.logo h1{font-size:23px}.logo p{color:#9fb4ca;font-size:12px;margin-top:2px}
+.money{background:#07111f;border:1px solid #284b6d;padding:9px 16px;border-radius:12px;font-weight:bold;color:var(--y)}
+#app{max-width:1150px;margin:18px auto 50px;padding:0 14px}
+nav{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:16px}
+nav button{background:#101d2d;color:#aebed0;border:1px solid #203a55;border-radius:10px;padding:11px 6px;font-weight:bold;transition:.2s}
+nav button:hover,nav button.on{background:var(--y);color:#111;transform:translateY(-2px)}
+.page{display:none}.page.on{display:block}
+.panel{background:linear-gradient(145deg,#101e2e,#0a1523);border:1px solid #23405c;border-radius:18px;padding:20px;box-shadow:0 15px 50px #0007}
+.title{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:10px}
+.title h2{font-size:26px}.title span{color:var(--y);font-weight:bold}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+.stat{background:#0b1827;border:1px solid #23405c;padding:12px;border-radius:12px}
+.stat small{color:var(--c)}.stat strong{display:block;margin-top:4px;color:var(--y);font-size:20px}
+canvas{width:100%;display:block;background:#263b2d;border:4px solid #182b3e;border-radius:14px}
+.ctl{display:flex;justify-content:center;flex-wrap:wrap;gap:9px;margin-top:12px}
+.btn{background:var(--y);color:#111;padding:10px 16px;border-radius:9px;font-weight:bold;transition:.2s;text-decoration:none;display:inline-block}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.btn.blue{background:var(--b);color:#fff}.btn.dark{background:#172b40;color:#fff;border:1px solid #31506d}.btn.green{background:var(--g);color:#04150d}.btn.red{background:var(--r);color:#fff}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.info{margin-top:14px;background:#0b1827;padding:14px;border-radius:12px;border-left:4px solid var(--y);color:#bdc9d5;line-height:1.6;font-size:14px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:13px}
+.card{background:linear-gradient(145deg,#15283d,#0b1725);border:1px solid #28445f;border-radius:14px;padding:14px}
+.card:hover{border-color:var(--y)}.card.sel{outline:3px solid var(--y)}
+.veh{height:100px;display:grid;place-items:center;background:radial-gradient(circle,#263f58,#091523);border-radius:10px;margin-bottom:10px;font-size:58px}
+.card h3{margin-bottom:4px}.card p{color:#94a7b9;font-size:13px;margin:4px 0}
+.price{color:var(--y)!important;font-size:18px!important;font-weight:bold;margin:9px 0!important}
+.bar{height:7px;background:#07101b;border-radius:20px;overflow:hidden;margin:3px 0 8px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--b),var(--y))}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:12px}
+.pb{background:#0b1827;border:1px solid #28445f;border-radius:14px;padding:14px;text-align:center}
+.pb h3{color:var(--y)}.pb p{color:#94a7b9;margin-top:4px}
+.row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+.row .btn.on{outline:3px solid #fff}
+.result{text-align:center;padding:20px;background:#0a1725;border-radius:14px;margin-top:12px;display:none}
+.result h2{font-size:32px;color:var(--y);margin-bottom:8px}
+.lbl{margin-top:10px;font-weight:bold;text-align:center}
+select{background:#172b40;color:#fff;padding:9px;border-radius:8px;border:1px solid #35516c}
+.footer{text-align:center;margin-top:26px;color:#75879a;font-size:13px;line-height:1.9}
+@media(max-width:800px){nav{grid-template-columns:repeat(3,1fr)}.stats{grid-template-columns:1fr 1fr}.vs{grid-template-columns:1fr}}
 </style>
 </head>
-
 <body>
-
-<header>
-<div class="header">
-
-    <div class="logo">
-        <div class="logoIcon">🚦</div>
-
-        <div>
-            <h1>FAIXA LIVRE</h1>
-            <p>Dia Nacional do Trânsito • Mundo Aberto</p>
-        </div>
-    </div>
-
-    <div class="money">
-        💰 R$ <span id="money">25000</span>
-    </div>
-
-</div>
-</header>
-
+<header><div class="hd">
+<div class="logo"><div class="logoI">🚦</div><div><h1>FAIXA LIVRE</h1><p>Dia Nacional do Trânsito • Mundo Aberto</p></div></div>
+<div class="money">💰 R$ <span id="money">0</span></div>
+</div></header>
 
 <div id="app">
-
-<nav class="menu">
-
-<button class="active" onclick="page('mundo',this)">🌎 Mundo</button>
-<button onclick="page('garagem',this)">🚗 Garagem</button>
-<button onclick="page('corrida',this)">🏁 Corridas</button>
-<button onclick="page('missoes',this)">📋 Missões</button>
-<button onclick="page('oficina',this)">🔧 Oficina</button>
-<button onclick="page('loja',this)">🛒 Loja</button>
-<button onclick="page('sobre',this)">📚 Sobre</button>
-
+<nav>
+<button data-p="mundo" class="on">🌎 Mundo</button>
+<button data-p="garagem">🚗 Garagem</button>
+<button data-p="corrida">🏁 Corridas</button>
+<button data-p="oficina">🔧 Oficina</button>
+<button data-p="loja">🛒 Loja</button>
+<button data-p="sobre">📚 Sobre</button>
 </nav>
 
-
-<!-- ================= MUNDO ================= -->
-
-<section id="mundo" class="page active">
-
-<div class="panel">
-
-<div class="title">
-
-<h2>🌎 Mundo Aberto</h2>
-
-<span id="locationText">Cidade Central</span>
-
-</div>
-
-
+<section id="mundo" class="page on"><div class="panel">
+<div class="title"><h2>🌎 Cidade Aberta</h2><span id="msgTop">Explore livremente</span></div>
 <div class="stats">
-
-<div class="stat">
-<small>Dinheiro</small>
-<strong>R$ <span id="money2">25000</span></strong>
+<div class="stat"><small>Dinheiro</small><strong>R$ <span id="money2">0</span></strong></div>
+<div class="stat"><small>Veículo</small><strong id="cv">-</strong></div>
+<div class="stat"><small>Combustível</small><strong><span id="fuel">100</span>%</strong></div>
+<div class="stat"><small>Nível</small><strong id="level">1</strong></div>
 </div>
-
-<div class="stat">
-<small>Veículo</small>
-<strong id="currentVehicle">Honda Civic</strong>
+<canvas id="world" width="960" height="540"></canvas>
+<div class="ctl">
+<button class="btn" onclick="interact()">✋ Interagir (E)</button>
+<button class="btn dark" onclick="togglePause()">⏸ Pausar (P)</button>
+<button class="btn blue" onclick="backToRoad()">↺ Voltar à pista</button>
+<button class="btn red" onclick="cancelMission()">✖ Cancelar missão</button>
 </div>
+<div class="info"><b>🎮 Controles:</b> W/↑ acelera • S/↓ freia e dá ré • A/D ou ←/→ vira • Espaço = freio de mão • E = interagir.<br>
+<b>📍 Locais (círculos no mapa):</b> ⛽ Posto, 🔧 Oficina, 🛒 Loja, 🏁 Corridas e 📦 Central de missões. Dirija até o círculo e aperte E.<br>
+<b>🚦 Regras:</b> respeite o semáforo (as faixas coloridas mostram o sinal), fique abaixo de 60 km/h nos radares 📷 e não bata: cada infração custa dinheiro.</div>
+</div></section>
 
-<div class="stat">
-<small>Combustível</small>
-<strong><span id="fuel">100</span>%</strong>
-</div>
-
-<div class="stat">
-<small>Nível</small>
-<strong id="level">1</strong>
-</div>
-
-</div>
-
-
-<canvas id="world" width="1100" height="570"></canvas>
-
-
-<div class="controls">
-
-<button class="btn" onclick="startWorld()">🚗 Dirigir</button>
-
-<button class="btn dark" onclick="stopWorld()">⏸ Pausar</button>
-
-<button class="btn blue" onclick="goMission()">📋 Procurar missão</button>
-
-<button class="btn green" onclick="refuel()">⛽ Abastecer</button>
-
-</div>
-
-
-<div class="info">
-
-<b>🎮 Controles:</b>
-
-W / ↑ = acelerar |
-S / ↓ = frear |
-A / ← = esquerda |
-D / → = direita
-
-<br>
-
-Dirija pelo mundo, encontre missões, postos de combustível,
-oficinas e pontos de corrida.
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= GARAGEM ================= -->
-
-<section id="garagem" class="page">
-
-<div class="panel">
-
-<div class="title">
-
-<h2>🚘 Minha Garagem</h2>
-
-<span id="garageCount">1 veículo</span>
-
-</div>
-
+<section id="garagem" class="page"><div class="panel">
+<div class="title"><h2>🚘 Minha Garagem</h2><span id="gc"></span></div>
 <div id="garageCards" class="cards"></div>
+</div></section>
 
+<section id="corrida" class="page"><div class="panel">
+<div class="title"><h2>🏁 Central de Corridas</h2><span>Largada no semáforo!</span></div>
+<div class="row">
+<button class="btn" id="mBot" onclick="setMode('bot')">🤖 Contra robô</button>
+<button class="btn dark" id="m2p" onclick="setMode('2p')">👥 2 jogadores</button>
 </div>
-
-</section>
-
-
-<!-- ================= CORRIDAS ================= -->
-
-<section id="corrida" class="page">
-
-<div class="panel">
-
-<div class="title">
-
-<h2>🏁 Central de Corridas</h2>
-
-<span>Escolha seu adversário</span>
-
+<div class="vs">
+<div class="pb"><div style="font-size:50px">👤</div><h3 id="nA">JOGADOR 1</h3><p id="cA"></p><p>Potência: <b id="pA"></b></p><p style="font-size:12px" id="kA"></p></div>
+<div class="pb"><div style="font-size:50px" id="iB">🤖</div><h3 id="nB"></h3><p id="cB"></p><p>Potência: <b id="pB"></b></p><p style="font-size:12px" id="kB"></p></div>
 </div>
+<div id="botBox"><div class="lbl">Escolha o adversário</div><div class="row" id="botList"></div></div>
+<div id="p2Box" style="display:none"><div class="lbl">Veículo do Jogador 2</div><div class="row"><select id="p2sel" onchange="p2i=+this.value;refreshRace()"></select></div></div>
+<div class="lbl">💰 Valor da aposta: R$ <span id="betV" style="color:#ffd000">500</span></div>
+<div class="row" id="betList"></div>
+<div class="info">Fique de olho no semáforo: <b>só aperte a tecla quando ficar VERDE</b>. Largar no vermelho trava o carro por 1 segundo (queimou a largada). Depois do verde, aperte a tecla o mais rápido que puder para dar aceleradas. Quem cruzar a linha de chegada primeiro leva o prêmio.<br>
+<b>Jogador 1: tecla W</b> &nbsp;•&nbsp; <b>Jogador 2: tecla ↑</b></div>
+<canvas id="race" width="960" height="360" style="margin-top:12px"></canvas>
+<div class="ctl"><button class="btn green" id="goBtn" onclick="startRace()">🏁 Apostar e largar</button></div>
+<div id="res" class="result"><h2 id="rT"></h2><p id="rX" style="line-height:1.7"></p>
+<div class="ctl"><button class="btn" onclick="startRace()">🔄 Revanche</button><button class="btn blue" onclick="newRace()">🏁 Nova corrida</button><button class="btn dark" onclick="page('mundo')">🌎 Voltar ao mundo</button></div></div>
+</div></section>
 
+<section id="oficina" class="page"><div class="panel">
+<div class="title"><h2>🔧 Oficina</h2><span id="upV"></span></div>
+<div class="cards" id="upgrades"></div>
+</div></section>
 
-<div class="raceBox">
+<section id="loja" class="page"><div class="panel">
+<div class="title"><h2>🛒 Loja de veículos</h2><span>Compre seu próximo veículo</span></div>
+<h2 style="margin:8px 0 12px">🚗 Carros</h2><div id="carsShop" class="cards"></div>
+<h2 style="margin:26px 0 12px">🏍️ Motos</h2><div id="bikesShop" class="cards"></div>
+</div></section>
 
-<div class="playerBox">
-
-<div class="playerIcon">👤</div>
-
-<h3>VOCÊ</h3>
-
-<p id="raceYourCar">Honda Civic</p>
-
-<p>Potência: <b id="yourPower">60</b></p>
-
-</div>
-
-
-<div class="playerBox">
-
-<div class="playerIcon">🤖</div>
-
-<h3 id="robotName">Rafael</h3>
-
-<p id="robotCar">BMW M3</p>
-
-<p>Potência: <b id="robotPower">65</b></p>
-
-</div>
-
-</div>
-
-
+<section id="sobre" class="page"><div class="panel">
+<div class="title"><h2>📚 Dia Nacional do Trânsito</h2><span>25 de setembro</span></div>
 <div class="info">
+<p>O Dia Nacional do Trânsito é celebrado em 25 de setembro. A data chama atenção para atitudes responsáveis nas ruas e estradas e para a convivência entre motoristas, motociclistas, ciclistas e pedestres.</p><br>
+<p>No jogo, você explora uma cidade em mundo aberto, faz entregas, administra dinheiro e combustível e aprende que respeitar as regras compensa: sinal vermelho e excesso de velocidade geram multas.</p><br>
+<p>🚦 Respeite a sinalização.<br>🛑 Dê preferência ao pedestre.<br>🪖 Use equipamentos de segurança.<br>📵 Não use celular enquanto dirige.<br>🍺 Se beber, não dirija.</p>
+</div></div></section>
 
-<b>💰 Valor da aposta:</b>
-
-<div class="bet">
-
-<button onclick="setBet(500)">R$ 500</button>
-
-<button onclick="setBet(1000)">R$ 1.000</button>
-
-<button onclick="setBet(2500)">R$ 2.500</button>
-
-<button onclick="setBet(5000)">R$ 5.000</button>
-
-<button onclick="setBet(10000)">R$ 10.000</button>
-
+<div class="footer">Dia Nacional do Trânsito • Projeto escolar • Faixa Livre<br>Nome: Katielly<br>
+<a class="btn" href="deficienciia.html">DEFICIENCIA</a></div>
 </div>
-
-<p style="text-align:center;margin-top:12px">
-
-Aposta selecionada:
-<b style="color:#ffd000">
-R$ <span id="betValue">500</span>
-</b>
-
-</p>
-
-</div>
-
-
-<div class="controls">
-
-<button class="btn" onclick="newOpponent()">🔄 Novo adversário</button>
-
-<button class="btn green" onclick="startRace()">🏁 Apostar e correr</button>
-
-</div>
-
-
-<canvas id="raceCanvas" width="1100" height="480"></canvas>
-
-
-<div id="raceResult" class="result" style="display:none">
-
-<h2 id="resultTitle">🏆 Vitória!</h2>
-
-<p id="resultText"></p>
-
-<div class="controls">
-
-<button class="btn" onclick="rematch()">🔄 Revanche</button>
-
-<button class="btn blue" onclick="newRace()">🏁 Outra corrida</button>
-
-<button class="btn dark" onclick="page('mundo')">🌎 Voltar ao mundo</button>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= MISSÕES ================= -->
-
-<section id="missoes" class="page">
-
-<div class="panel">
-
-<div class="title">
-
-<h2>📋 Missões</h2>
-
-<span>Ganhe dinheiro</span>
-
-</div>
-
-
-<div id="missions"></div>
-
-</div>
-
-</section>
-
-
-<!-- ================= OFICINA ================= -->
-
-<section id="oficina" class="page">
-
-<div class="panel">
-
-<div class="title">
-
-<h2>🔧 Oficina</h2>
-
-<span id="upgradeVehicle">Honda Civic</span>
-
-</div>
-
-<div class="upgrades" id="upgrades"></div>
-
-</div>
-
-</section>
-
-
-<!-- ================= LOJA ================= -->
-
-<section id="loja" class="page">
-
-<div class="panel">
-
-<div class="title">
-
-<h2>🛒 Loja de veículos</h2>
-
-<span>Compre seu próximo veículo</span>
-
-</div>
-
-<h2 style="margin:10px 0 15px">🚗 Carros</h2>
-
-<div id="carsShop" class="cards"></div>
-
-<h2 style="margin:30px 0 15px">🏍️ Motos</h2>
-
-<div id="bikesShop" class="cards"></div>
-
-</div>
-
-</section>
-
-
-<!-- ================= SOBRE ================= -->
-
-<section id="sobre" class="page">
-
-<div class="panel">
-
-<div class="title">
-
-<h2>📚 Dia Nacional do Trânsito</h2>
-
-<span>25 de setembro</span>
-
-</div>
-
-<div class="info">
-
-<p>
-
-O Dia Nacional do Trânsito é celebrado em 25 de setembro.
-
-A data chama atenção para a importância de atitudes responsáveis
-nas ruas e estradas e para a convivência entre motoristas,
-motociclistas, ciclistas e pedestres.
-
-</p>
-
-<br>
-
-<p>
-
-No jogo, a ideia é aprender sobre trânsito enquanto o jogador
-explora um mundo aberto, realiza missões, participa de corridas
-e precisa administrar seu dinheiro, combustível e veículo.
-
-</p>
-
-<br>
-
-<p>
-
-🚦 Respeite a sinalização.
-
-<br>
-🛑 Dê preferência ao pedestre.
-
-<br>
-🪖 Use equipamentos de segurança.
-
-<br>
-📵 Não use celular enquanto dirige.
-
-<br>
-🍺 Se beber, não dirija.
-
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<div class="footer">
-
-Dia Nacional do Trânsito • Projeto escolar • Faixa Livre
-
-<br>
-
-Nome: Katielly
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Turma: 2º EMTI
-
-</div>
-
-</div>
-
 
 <script>
+"use strict";
+const T=64,N=40,W=960,H=540,$=id=>document.getElementById(id);
+const fmt=n=>Number(n).toLocaleString("pt-BR");
 
-/* ============================================================
-   FAIXA LIVRE
-   MUNDO ABERTO + GARAGEM + MISSÕES + CORRIDAS + LOJA
-============================================================ */
-
-
-/* ================= DADOS ================= */
-
-const vehicles = [
-
-{
-name:"Honda Civic",
-type:"car",
-emoji:"🚗",
-price:80000,
-power:60,
-speed:65,
-grip:60
-},
-
-{
-name:"BMW M3",
-type:"car",
-emoji:"🚘",
-price:250000,
-power:75,
-speed:78,
-grip:72
-},
-
-{
-name:"Chevrolet Camaro",
-type:"car",
-emoji:"🏎️",
-price:350000,
-power:82,
-speed:84,
-grip:70
-},
-
-{
-name:"Porsche 911",
-type:"car",
-emoji:"🏎️",
-price:600000,
-power:88,
-speed:91,
-grip:88
-},
-
-{
-name:"McLaren P1",
-type:"car",
-emoji:"🏎️",
-price:2500000,
-power:97,
-speed:99,
-grip:94
-},
-
-{
-name:"Ferrari 488",
-type:"car",
-emoji:"🏎️",
-price:3000000,
-power:96,
-speed:98,
-grip:92
-},
-
-{
-name:"Bugatti Chiron",
-type:"car",
-emoji:"🚘",
-price:8000000,
-power:100,
-speed:100,
-grip:96
-},
-
-{
-name:"Honda CB 500",
-type:"bike",
-emoji:"🏍️",
-price:35000,
-power:55,
-speed:65,
-grip:70
-},
-
-{
-name:"Kawasaki Ninja 400",
-type:"bike",
-emoji:"🏍️",
-price:45000,
-power:65,
-speed:75,
-grip:76
-},
-
-{
-name:"Yamaha MT-09",
-type:"bike",
-emoji:"🏍️",
-price:70000,
-power:75,
-speed:82,
-grip:82
-},
-
-{
-name:"Honda CBR1000RR-R",
-type:"bike",
-emoji:"🏍️",
-price:150000,
-power:90,
-speed:94,
-grip:88
-},
-
-{
-name:"Kawasaki Ninja H2",
-type:"bike",
-emoji:"🏍️",
-price:400000,
-power:98,
-speed:100,
-grip:91
-},
-
-{
-name:"Ducati Panigale V4",
-type:"bike",
-emoji:"🏍️",
-price:300000,
-power:95,
-speed:98,
-grip:96
-},
-
-{
-name:"BMW S 1000 RR",
-type:"bike",
-emoji:"🏍️",
-price:250000,
-power:92,
-speed:97,
-grip:93
-},
-
-{
-name:"Harley-Davidson",
-type:"bike",
-emoji:"🏍️",
-price:180000,
-power:72,
-speed:70,
-grip:80
-}
-
+/* ============ VEÍCULOS ============ */
+const V=[
+{n:"Honda Civic",t:"car",e:"🚗",p:80000,pw:60,sp:65,gr:60,c:"#e53935"},
+{n:"BMW M3",t:"car",e:"🚘",p:250000,pw:75,sp:78,gr:72,c:"#1e88e5"},
+{n:"Chevrolet Camaro",t:"car",e:"🏎️",p:350000,pw:82,sp:84,gr:70,c:"#fdd835"},
+{n:"Porsche 911",t:"car",e:"🏎️",p:600000,pw:88,sp:91,gr:88,c:"#eceff1"},
+{n:"McLaren P1",t:"car",e:"🏎️",p:2500000,pw:97,sp:99,gr:94,c:"#fb8c00"},
+{n:"Ferrari 488",t:"car",e:"🏎️",p:3000000,pw:96,sp:98,gr:92,c:"#d50000"},
+{n:"Bugatti Chiron",t:"car",e:"🚘",p:8000000,pw:100,sp:100,gr:96,c:"#283593"},
+{n:"Honda CB 500",t:"bike",e:"🏍️",p:35000,pw:55,sp:65,gr:70,c:"#c62828"},
+{n:"Kawasaki Ninja 400",t:"bike",e:"🏍️",p:45000,pw:65,sp:75,gr:76,c:"#43a047"},
+{n:"Yamaha MT-09",t:"bike",e:"🏍️",p:70000,pw:75,sp:82,gr:82,c:"#3949ab"},
+{n:"Honda CBR1000RR-R",t:"bike",e:"🏍️",p:150000,pw:90,sp:94,gr:88,c:"#e53935"},
+{n:"Kawasaki Ninja H2",t:"bike",e:"🏍️",p:400000,pw:98,sp:100,gr:91,c:"#00e676"},
+{n:"Ducati Panigale V4",t:"bike",e:"🏍️",p:300000,pw:95,sp:98,gr:96,c:"#ff1744"},
+{n:"BMW S 1000 RR",t:"bike",e:"🏍️",p:250000,pw:92,sp:97,gr:93,c:"#eeeeee"},
+{n:"Harley-Davidson",t:"bike",e:"🏍️",p:180000,pw:72,sp:70,gr:80,c:"#455a64"}
 ];
+const veh=n=>V.find(v=>v.n===n);
 
+/* ============ ESTADO + SAVE ============ */
+const DEF=()=>({money:25000,fuel:100,level:1,owned:["Honda Civic"],cur:"Honda Civic",up:{},done:0,wins:0,losses:0});
+let G=DEF();
+try{const s=JSON.parse(localStorage.getItem("faixaLivre2"));if(s&&Array.isArray(s.owned))G=Object.assign(DEF(),s);}catch(e){}
+G.owned=G.owned.filter(n=>veh(n));
+if(!G.owned.length)G.owned=["Honda Civic"];
+if(!G.owned.includes(G.cur))G.cur=G.owned[0];
+G.money=Number(G.money)||0;G.fuel=Math.max(0,Math.min(100,Number(G.fuel)||0));
+const save=()=>{try{localStorage.setItem("faixaLivre2",JSON.stringify(G))}catch(e){}};
+const cur=()=>veh(G.cur);
+const upg=n=>G.up[n]||(G.up[n]={engine:0,speed:0,tires:0,brakes:0,tank:0});
+const stat=v=>{const u=upg(v.n);return{pw:Math.min(110,v.pw+u.engine*5),sp:Math.min(110,v.sp+u.speed*3),gr:Math.min(110,v.gr+u.tires*4)}};
+const lvl=()=>{G.level=1+Math.floor((G.done+G.wins)/3)};
 
-/* ================= ESTADO DO JOGO ================= */
-
-let game = {
-
-money:25000,
-
-level:1,
-
-fuel:100,
-
-distance:0,
-
-current:vehicles[0],
-
-owned:[vehicles[0]],
-
-upgrades:{
-
-engine:0,
-
-speed:0,
-
-tires:0,
-
-brakes:0,
-
-tank:0
-
-},
-
-missionsDone:0,
-
-wins:0,
-
-losses:0
-
-};
-
-
-let worldRunning=false;
-
-let worldAnimation;
-
-let keys={};
-
-let player={x:550,y:430,speed:0};
-
-
-/* ================= SALVAR ================= */
-
-function save(){
-
-localStorage.setItem(
-"faixaLivreSave",
-JSON.stringify(game)
-);
-
+function hudUpdate(){
+ $("money").textContent=fmt(G.money);$("money2").textContent=fmt(G.money);
+ $("fuel").textContent=Math.round(G.fuel);$("level").textContent=G.level;$("cv").textContent=G.cur;
 }
 
+/* ============ NAVEGAÇÃO ============ */
+let active="mundo";
+function page(id){
+ active=id;
+ document.querySelectorAll(".page").forEach(p=>p.classList.toggle("on",p.id===id));
+ document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.p===id));
+ if(id==="garagem")renderGarage();
+ if(id==="loja")renderShop();
+ if(id==="oficina")renderUp();
+ if(id==="corrida")refreshRace();
+ hudUpdate();
+}
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>page(b.dataset.p));
 
-function load(){
+/* ============ MAPA ============ */
+const c8=i=>(8*i+1)*T;               /* centro da rua i */
+const road=(x,y)=>x%8<2||y%8<2;
+function tile(x,y){
+ if(x<0||y<0||x>=N||y>=N)return 1;
+ if(road(x,y))return 0;
+ const lx=x%8,ly=y%8;
+ if(lx>=3&&lx<=6&&ly>=3&&ly<=6)return(((x>>3)*3+(y>>3)*5)%4===0)?2:1;
+ return 3;
+}
+function hit(px,py,r){
+ for(let y=Math.floor((py-r)/T);y<=Math.floor((py+r)/T);y++)
+ for(let x=Math.floor((px-r)/T);x<=Math.floor((px+r)/T);x++){
+  if(tile(x,y)!==1)continue;
+  const cx=Math.max(x*T,Math.min(px,x*T+T)),cy=Math.max(y*T,Math.min(py,y*T+T));
+  if((px-cx)**2+(py-cy)**2<r*r)return true;
+ }
+ return false;
+}
+const POI=[
+{k:"posto",e:"⛽",n:"Posto",col:"#e53935",x:c8(0)+4*T,y:c8(1)},
+{k:"posto",e:"⛽",n:"Posto",col:"#e53935",x:c8(3)+4*T,y:c8(0)},
+{k:"oficina",e:"🔧",n:"Oficina",col:"#8e24aa",x:c8(2)+4*T,y:c8(2)},
+{k:"loja",e:"🛒",n:"Loja",col:"#00acc1",x:c8(3)+4*T,y:c8(3)},
+{k:"corrida",e:"🏁",n:"Corridas",col:"#ffd000",x:c8(1),y:c8(3)+4*T},
+{k:"missao",e:"📦",n:"Missões",col:"#0877ff",x:c8(2),y:c8(0)+4*T}
+];
+const RADAR=[[c8(2)+5*T,c8(1)],[c8(1),c8(2)+3*T],[c8(3)+2*T,c8(2)],[c8(3),c8(3)+5*T],[c8(2)+3*T,c8(4)]];
+const PAL=["#7a8794","#8a6f6f","#6f8a7a","#8a866f","#6f7a8a","#7d6f8a"];
 
-let save=localStorage.getItem("faixaLivreSave");
+/* minimapa pré-renderizado */
+const MM=5,mm=document.createElement("canvas");mm.width=mm.height=N*MM;
+(function(){const c=mm.getContext("2d");for(let y=0;y<N;y++)for(let x=0;x<N;x++){const t=tile(x,y);c.fillStyle=t===0?"#5b626c":t===1?"#22303f":t===2?"#2e6b3a":"#3a4654";c.fillRect(x*MM,y*MM,MM,MM);}})();
 
-if(save){
+/* ============ MUNDO: ESTADO ============ */
+const K={};
+let P={x:c8(1)+2*T,y:c8(1)+T/2,a:0,v:0};
+let M=null,paused=false,toastM="",toastT=0,wasIn=false,radarCd=0,crashCd=0,now=0;
+const toast=(m,d=3)=>{toastM=m;toastT=d};
+function fine(v,why){
+ G.money=Math.max(0,G.money-v);toast("🚨 Multa R$ "+fmt(v)+": "+why,3.5);hudUpdate();save();
+}
+const lights=()=>{const p=(now/1000)%12;return{ew:p<5?"g":p<6?"y":"r",ns:p<6?"r":p<11?"g":"y"}};
+const LC={g:"#19d47b",y:"#ffd000",r:"#ff4757"};
 
-try{
-
-let data=JSON.parse(save);
-
-game=data;
-
-game.current=
-vehicles.find(v=>v.name===game.current.name)
-||vehicles[0];
-
-}catch(e){}
-
+function stepWorld(dt){
+ const v=cur(),s=stat(v),u=upg(v.n);
+ const up=K.KeyW||K.ArrowUp,dn=K.KeyS||K.ArrowDown,lf=K.KeyA||K.ArrowLeft,rt=K.KeyD||K.ArrowRight;
+ const tt=tile(Math.floor(P.x/T),Math.floor(P.y/T)),off=tt!==0;
+ const maxV=G.fuel>0?(300+s.sp*4)*(off?.45:1):0;
+ const acc=120+s.pw*3,brake=500+u.brakes*90;
+ if(up&&G.fuel>0)P.v+=(P.v<0?brake:acc)*dt;
+ else if(dn)P.v-=(P.v>0?brake:acc*.5)*dt;
+ else{const d=90*dt;P.v=Math.abs(P.v)<d?0:P.v-Math.sign(P.v)*d}
+ if(K.Space){const d=450*dt;P.v=Math.abs(P.v)<d?0:P.v-Math.sign(P.v)*d}
+ P.v-=P.v*(off?2:.4)*dt;
+ if(P.v>maxV)P.v=Math.max(maxV,P.v-400*dt);
+ if(P.v<-maxV*.4)P.v=-maxV*.4;
+ const rate=(2.2+s.gr/100*1.2+u.tires*.1)/(1+Math.abs(P.v)/900);
+ P.a+=((rt?1:0)-(lf?1:0))*rate*dt*Math.max(-1,Math.min(1,P.v/90));
+ const R=v.t==="bike"?10:15;
+ const nx=P.x+Math.cos(P.a)*P.v*dt,ny=P.y+Math.sin(P.a)*P.v*dt;
+ let bump=false;
+ if(!hit(nx,P.y,R))P.x=nx;else bump=true;
+ if(!hit(P.x,ny,R))P.y=ny;else bump=true;
+ if(bump){
+  if(Math.abs(P.v)>200&&crashCd<=0){crashCd=3;fine(200,"batida! Reparo do veículo")}
+  P.v*=.3;
+ }
+ crashCd-=dt;radarCd-=dt;
+ G.fuel=Math.max(0,G.fuel-Math.abs(P.v)*dt*.0035/(1+u.tank*.2));
+ /* semáforo */
+ const tx=Math.floor(P.x/T),ty=Math.floor(P.y/T),inn=tx%8<2&&ty%8<2;
+ if(inn&&!wasIn&&Math.abs(P.v)>50){
+  const ew=Math.abs(Math.cos(P.a))>.707,L=lights();
+  if((ew?L.ew:L.ns)==="r")fine(300,"avançou o sinal vermelho");
+ }
+ wasIn=inn;
+ /* radar */
+ for(const r of RADAR)if(radarCd<=0&&Math.hypot(P.x-r[0],P.y-r[1])<45&&Math.abs(P.v)*.35>60){radarCd=8;fine(250,"excesso de velocidade no radar")}
+ /* missão */
+ if(M){
+  M.t-=dt;
+  const d=Math.hypot(P.x-M.x,P.y-M.y);
+  if(d<55){
+   if(Math.abs(P.v)<160){G.money+=M.r;G.done++;lvl();toast("✅ Entrega concluída! +R$ "+fmt(M.r),4);M=null;hudUpdate();save();}
+   else toast("Reduza a velocidade para entregar!",1);
+  }else if(M.t<=0){toast("⏰ Tempo esgotado! Missão falhou.",4);M=null;}
+ }
+ if(G.fuel<=0&&toastT<=0)toast("⛽ Sem combustível! Aperte E para chamar o guincho.",2);
 }
 
+/* ============ INTERAÇÕES ============ */
+const nearPOI=()=>POI.find(p=>Math.hypot(P.x-p.x,P.y-p.y)<62);
+function interact(){
+ if(active!=="mundo")return;
+ const p=nearPOI();
+ if(!p){if(G.fuel<=0)tow();return}
+ if(p.k==="posto")refuel();
+ else if(p.k==="missao")acceptMission();
+ else page(p.k);
 }
-
-load();
-
-
-/* ================= FORMATAR DINHEIRO ================= */
-
-function money(n){
-
-return Number(n).toLocaleString(
-"pt-BR"
-);
-
-}
-
-
-/* ================= ATUALIZAR HUD ================= */
-
-function updateHUD(){
-
-document.getElementById("money").textContent=money(game.money);
-
-document.getElementById("money2").textContent=money(game.money);
-
-document.getElementById("fuel").textContent=Math.round(game.fuel);
-
-document.getElementById("level").textContent=game.level;
-
-document.getElementById("currentVehicle").textContent=
-game.current.name;
-
-document.getElementById("upgradeVehicle").textContent=
-game.current.name;
-
-document.getElementById("garageCount").textContent=
-game.owned.length+" veículo(s)";
-
-}
-
-
-/* ================= NAVEGAÇÃO ================= */
-
-function page(id,button){
-
-document.querySelectorAll(".page")
-.forEach(p=>p.classList.remove("active"));
-
-document.getElementById(id)
-.classList.add("active");
-
-document.querySelectorAll(".menu button")
-.forEach(b=>b.classList.remove("active"));
-
-if(button){
-
-button.classList.add("active");
-
-}else{
-
-let buttons=
-document.querySelectorAll(".menu button");
-
-buttons.forEach(b=>{
-
-if(b.innerText.toLowerCase().includes(id))
-b.classList.add("active");
-
-});
-
-}
-
-if(id==="garagem")renderGarage();
-
-if(id==="loja")renderShop();
-
-if(id==="oficina")renderUpgrades();
-
-if(id==="missoes")renderMissions();
-
-if(id==="corrida")prepareRace();
-
-}
-
-
-/* ================= MUNDO ================= */
-
-const world=
-document.getElementById("world");
-
-const wctx=
-world.getContext("2d");
-
-
-function drawWorld(){
-
-wctx.clearRect(
-0,0,
-world.width,
-world.height
-);
-
-
-/* céu */
-
-let sky=
-wctx.createLinearGradient(
-0,0,0,570
-);
-
-sky.addColorStop(0,"#6ec6ff");
-
-sky.addColorStop(1,"#d5f1ff");
-
-wctx.fillStyle=sky;
-
-wctx.fillRect(
-0,0,1100,570
-);
-
-
-/* cidade */
-
-wctx.fillStyle="#82909b";
-
-for(let i=0;i<14;i++){
-
-let x=i*90;
-
-let h=80+Math.random()*100;
-
-wctx.fillRect(
-x,
-230-h,
-70,
-h
-);
-
-wctx.fillStyle="#d7c66b";
-
-for(let y=245-h;y<225;y+=20){
-
-wctx.fillRect(
-x+10,
-y,
-8,
-8
-);
-
-wctx.fillRect(
-x+30,
-y,
-8,
-8
-);
-
-wctx.fillRect(
-x+50,
-y,
-8,
-8
-);
-
-}
-
-wctx.fillStyle="#82909b";
-
-}
-
-
-/* grama */
-
-wctx.fillStyle="#3f7044";
-
-wctx.fillRect(
-0,
-300,
-1100,
-270
-);
-
-
-/* estrada principal */
-
-wctx.fillStyle="#30343a";
-
-wctx.fillRect(
-0,
-360,
-1100,
-150
-);
-
-
-/* acostamento */
-
-wctx.fillStyle="#d4d4cc";
-
-wctx.fillRect(
-0,
-360,
-1100,
-6
-);
-
-wctx.fillRect(
-0,
-504,
-1100,
-6
-);
-
-
-/* linhas */
-
-wctx.fillStyle="#f7d51a";
-
-for(let x=0;x<1100;x+=80){
-
-wctx.fillRect(
-x,
-433,
-45,
-5
-);
-
-}
-
-
-/* montanhas */
-
-wctx.fillStyle="#41606e";
-
-wctx.beginPath();
-
-wctx.moveTo(0,300);
-
-for(let x=0;x<=1100;x+=80){
-
-wctx.lineTo(
-x,
-230+Math.sin(x)*35
-);
-
-}
-
-wctx.lineTo(1100,300);
-
-wctx.fill();
-
-
-/* posto */
-
-wctx.fillStyle="#e9e9e9";
-
-wctx.fillRect(
-70,285,115,65
-);
-
-wctx.fillStyle="#e52222";
-
-wctx.fillRect(
-70,285,115,16
-);
-
-wctx.fillStyle="#222";
-
-wctx.font="bold 16px Arial";
-
-wctx.fillText(
-"⛽ POSTO",
-82,320
-);
-
-
-/* corrida */
-
-wctx.fillStyle="#ffd000";
-
-wctx.fillRect(
-850,300,170,55
-);
-
-wctx.fillStyle="#111";
-
-wctx.font="bold 17px Arial";
-
-wctx.fillText(
-"🏁 CORRIDA",
-880,335
-);
-
-
-/* missão */
-
-wctx.fillStyle="#0877ff";
-
-wctx.beginPath();
-
-wctx.arc(
-540,315,
-25,
-0,
-Math.PI*2
-);
-
-wctx.fill();
-
-wctx.fillStyle="#fff";
-
-wctx.font="bold 23px Arial";
-
-wctx.fillText(
-"!",
-535,
-323
-);
-
-
-/* jogador */
-
-wctx.font="55px Arial";
-
-wctx.fillText(
-game.current.emoji,
-player.x-28,
-player.y
-);
-
-
-/* combustível */
-
-wctx.fillStyle="#fff";
-
-wctx.font="bold 15px Arial";
-
-wctx.fillText(
-"Combustível: "+Math.round(game.fuel)+"%",
-20,
-35
-);
-
-}
-
-
-/* ================= MOVIMENTO ================= */
-
-function startWorld(){
-
-worldRunning=true;
-
-cancelAnimationFrame(worldAnimation);
-
-worldLoop();
-
-}
-
-
-function stopWorld(){
-
-worldRunning=false;
-
-cancelAnimationFrame(worldAnimation);
-
-}
-
-
-function worldLoop(){
-
-if(!worldRunning)return;
-
-if(keys["ArrowUp"]||keys["w"]){
-
-player.y-=4;
-
-game.fuel-=0.015;
-
-game.distance+=0.02;
-
-}
-
-if(keys["ArrowDown"]||keys["s"]){
-
-player.y+=2;
-
-game.fuel-=0.008;
-
-}
-
-if(keys["ArrowLeft"]||keys["a"]){
-
-player.x-=4;
-
-}
-
-if(keys["ArrowRight"]||keys["d"]){
-
-player.x+=4;
-
-}
-
-
-player.x=Math.max(
-30,
-Math.min(1070,player.x)
-);
-
-player.y=Math.max(
-320,
-Math.min(550,player.y)
-);
-
-
-if(game.fuel<=0){
-
-game.fuel=0;
-
-worldRunning=false;
-
-alert(
-"⛽ Você ficou sem combustível! Procure um posto."
-);
-
-}
-
-
-drawWorld();
-
-updateHUD();
-
-worldAnimation=
-requestAnimationFrame(worldLoop);
-
-}
-
-
-document.addEventListener(
-"keydown",
-e=>{
-
-keys[e.key.toLowerCase()]=true;
-
-if(
-e.key.startsWith("Arrow")
-)e.preventDefault();
-
-}
-);
-
-
-document.addEventListener(
-"keyup",
-e=>{
-
-keys[e.key.toLowerCase()]=false;
-
-}
-);
-
-
-/* ================= ABASTECER ================= */
-
 function refuel(){
+ const cost=Math.ceil((100-G.fuel)*8);
+ if(cost<=0){toast("Tanque já está cheio.");return}
+ if(G.money<cost){toast("💰 Dinheiro insuficiente (R$ "+fmt(cost)+").");return}
+ G.money-=cost;G.fuel=100;toast("⛽ Tanque cheio! Custo: R$ "+fmt(cost));hudUpdate();save();
+}
+function tow(){
+ P.x=POI[0].x-80;P.y=POI[0].y+T/2;P.a=0;P.v=0;
+ G.money=Math.max(0,G.money-300);G.fuel=10;toast("🚛 Guincho! Taxa de R$ 300. Abasteça no posto.",4);hudUpdate();save();
+}
+function acceptMission(){
+ if(M){toast("Você já tem uma entrega em andamento.");return}
+ let x,y,d=0,i=0;
+ do{
+  do{x=Math.floor(Math.random()*N);y=Math.floor(Math.random()*N)}while(!road(x,y));
+  x=(x+.5)*T;y=(y+.5)*T;d=Math.hypot(x-P.x,y-P.y);
+ }while(d<900&&++i<200);
+ M={x,y,t:d/150+25,r:Math.round((600+d*2.5)/100)*100};
+ toast("📦 Entrega aceita! Siga a seta amarela.",4);
+}
+function cancelMission(){if(M){M=null;toast("Missão cancelada.")}}
+function backToRoad(){P.x=c8(1)+2*T;P.y=c8(1)+T/2;P.a=0;P.v=0;toast("Você voltou para a pista.")}
+function togglePause(){if(active==="mundo")paused=!paused}
 
-let cost=
-Math.ceil(
-(100-game.fuel)*8
-);
-
-if(cost<1)cost=1;
-
-if(game.money<cost){
-
-alert("💰 Dinheiro insuficiente.");
-
-return;
-
+/* ============ DESENHO ============ */
+const wc=$("world").getContext("2d");
+function drawCar(c,x,y,a,col,bike){
+ c.save();c.translate(x,y);c.rotate(a);
+ if(bike){
+  c.fillStyle="#111";c.fillRect(-20,-3,40,6);
+  c.fillStyle=col;c.fillRect(-9,-6,20,12);
+  c.fillStyle="#f0c8a0";c.beginPath();c.arc(-2,0,6,0,7);c.fill();
+  c.fillStyle="#222";c.beginPath();c.arc(-2,0,5,0,7);c.fill();
+  c.fillStyle="#fff7b0";c.fillRect(19,-2,3,4);
+ }else{
+  c.fillStyle="#0005";c.fillRect(-22,-9,48,24);
+  c.fillStyle=col;c.fillRect(-24,-12,48,24);
+  c.fillStyle="#0003";c.fillRect(-24,-12,48,4);
+  c.fillStyle="#a9dcff";c.fillRect(2,-9,10,18);c.fillRect(-16,-9,6,18);
+  c.fillStyle="#0002";c.fillRect(-10,-10,12,20);
+  c.fillStyle="#fff7b0";c.fillRect(22,-10,3,5);c.fillRect(22,5,3,5);
+  c.fillStyle="#b71c1c";c.fillRect(-25,-10,2,5);c.fillRect(-25,5,2,5);
+ }
+ c.restore();
+}
+function drawWorld(){
+ const c=wc,v=cur(),L=lights();
+ const cx=Math.max(0,Math.min(N*T-W,P.x-W/2)),cy=Math.max(0,Math.min(N*T-H,P.y-H/2));
+ c.fillStyle="#2f5d3a";c.fillRect(0,0,W,H);
+ const x0=Math.floor(cx/T),x1=Math.min(N-1,Math.floor((cx+W)/T)),y0=Math.floor(cy/T),y1=Math.min(N-1,Math.floor((cy+H)/T));
+ for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++){
+  const t=tile(x,y),px=x*T-cx,py=y*T-cy;
+  c.fillStyle=t===0?"#33383f":t===2?"#3f8a4b":t===3?"#a7a9a3":"#6b7078";
+  c.fillRect(px,py,T+1,T+1);
+  if(t===0){
+   c.fillStyle="#f7d51a";
+   if(x%8===0&&y%8>=2&&y%2===0)c.fillRect(px+T-2,py+10,4,T-20);
+   if(y%8===0&&x%8>=2&&x%2===0)c.fillRect(px+10,py+T-2,T-20,4);
+  }
+  if(t===2&&(x+y)%2===0){c.fillStyle="#4a9a57";c.fillRect(px+8,py+8,T-16,T-16)}
+ }
+ /* prédios */
+ for(let bx=0;bx<5;bx++)for(let by=0;by<5;by++){
+  if(tile(bx*8+3,by*8+3)!==1)continue;
+  const X=(bx*8+3)*T-cx,Y=(by*8+3)*T-cy,S=4*T;
+  if(X>W||Y>H||X+S<0||Y+S<0)continue;
+  c.fillStyle="#0004";c.fillRect(X+8,Y+8,S,S);
+  c.fillStyle=PAL[(bx+by*2)%6];c.fillRect(X,Y,S,S);
+  c.fillStyle="#ffffff22";c.fillRect(X+14,Y+14,S-28,S-28);
+  c.fillStyle="#4a4f57";c.fillRect(X+28,Y+28,44,30);c.fillRect(X+S-70,Y+S-58,40,28);
+  c.strokeStyle="#0003";c.lineWidth=3;c.strokeRect(X+1,Y+1,S-2,S-2);
+ }
+ /* faixas de semáforo */
+ for(let i=0;i<5;i++)for(let j=0;j<5;j++){
+  const ox=i*8*T-cx,oy=j*8*T-cy;
+  if(ox>W||oy>H||ox+2*T<-20||oy+2*T<-20)continue;
+  c.fillStyle=LC[L.ew];c.fillRect(ox-9,oy,8,2*T);c.fillRect(ox+2*T+1,oy,8,2*T);
+  c.fillStyle=LC[L.ns];c.fillRect(ox,oy-9,2*T,8);c.fillRect(ox,oy+2*T+1,2*T,8);
+ }
+ /* radares */
+ c.textAlign="center";c.textBaseline="middle";
+ for(const r of RADAR){
+  const X=r[0]-cx,Y=r[1]-cy;
+  c.fillStyle="#fff";c.beginPath();c.arc(X,Y,20,0,7);c.fill();
+  c.strokeStyle="#e53935";c.lineWidth=4;c.stroke();
+  c.fillStyle="#111";c.font="bold 16px Arial";c.fillText("60",X,Y);
+  c.font="14px Arial";c.fillText("📷",X,Y-30);
+ }
+ /* pontos de interesse */
+ for(const p of POI){
+  const X=p.x-cx,Y=p.y-cy;
+  if(X<-80||X>W+80||Y<-80||Y>H+80)continue;
+  const r=34+3*Math.sin(now/300);
+  c.fillStyle=p.col+"55";c.beginPath();c.arc(X,Y,r+8,0,7);c.fill();
+  c.fillStyle=p.col;c.beginPath();c.arc(X,Y,r-6,0,7);c.fill();
+  c.font="26px Arial";c.fillStyle="#fff";c.fillText(p.e,X,Y+1);
+  c.font="bold 13px Arial";c.fillStyle="#fff";c.strokeStyle="#000";c.lineWidth=3;c.strokeText(p.n,X,Y+r+12);c.fillText(p.n,X,Y+r+12);
+ }
+ /* destino da missão */
+ if(M){
+  const X=M.x-cx,Y=M.y-cy,r=30+4*Math.sin(now/200);
+  c.fillStyle="#ffd00066";c.beginPath();c.arc(X,Y,r,0,7);c.fill();
+  c.fillStyle="#ffd000";c.beginPath();c.arc(X,Y,14,0,7);c.fill();
+  c.font="20px Arial";c.fillStyle="#000";c.fillText("📍",X,Y);
+  if(X<20||X>W-20||Y<20||Y>H-20){
+   const ang=Math.atan2(M.y-P.y,M.x-P.x),sx=P.x-cx,sy=P.y-cy;
+   c.save();c.translate(sx+Math.cos(ang)*190,sy+Math.sin(ang)*190);c.rotate(ang);
+   c.fillStyle="#ffd000";c.beginPath();c.moveTo(18,0);c.lineTo(-12,-14);c.lineTo(-12,14);c.fill();c.restore();
+  }
+ }
+ drawCar(c,P.x-cx,P.y-cy,P.a,v.c,v.t==="bike");
+ hudDraw(c);
+}
+function hudDraw(c){
+ const kmh=Math.round(Math.abs(P.v)*.35);
+ c.textAlign="left";c.textBaseline="alphabetic";
+ c.fillStyle="#000a";c.fillRect(14,H-84,190,70);
+ c.fillStyle=kmh>60?"#ff9d4d":"#fff";c.font="bold 34px Arial";c.fillText(kmh,26,H-42);
+ c.font="12px Arial";c.fillStyle="#9ba8b8";c.fillText("km/h • limite 60",86,H-42);
+ c.fillStyle="#07101b";c.fillRect(26,H-30,166,10);
+ c.fillStyle=G.fuel<20?"#ff4757":"#19d47b";c.fillRect(26,H-30,166*G.fuel/100,10);
+ if(M){
+  c.fillStyle="#000a";c.fillRect(14,14,250,62);
+  c.fillStyle="#ffd000";c.font="bold 14px Arial";c.fillText("📦 Entrega em andamento",24,34);
+  c.fillStyle="#fff";c.font="13px Arial";
+  c.fillText("Distância: "+Math.round(Math.hypot(P.x-M.x,P.y-M.y)/10)+" m  •  Tempo: "+Math.ceil(M.t)+" s",24,54);
+  c.fillStyle="#19d47b";c.fillText("Recompensa: R$ "+fmt(M.r),24,70);
+ }
+ /* minimapa */
+ const mx=W-N*MM-14,my=14;
+ c.globalAlpha=.85;c.drawImage(mm,mx,my);c.globalAlpha=1;
+ c.strokeStyle="#fff";c.lineWidth=2;c.strokeRect(mx,my,N*MM,N*MM);
+ for(const p of POI){c.fillStyle=p.col;c.fillRect(mx+p.x/T*MM-3,my+p.y/T*MM-3,6,6)}
+ if(M){c.fillStyle="#ffd000";c.beginPath();c.arc(mx+M.x/T*MM,my+M.y/T*MM,4,0,7);c.fill()}
+ c.save();c.translate(mx+P.x/T*MM,my+P.y/T*MM);c.rotate(P.a);c.fillStyle="#fff";
+ c.beginPath();c.moveTo(6,0);c.lineTo(-4,-4);c.lineTo(-4,4);c.fill();c.restore();
+ /* avisos */
+ c.textAlign="center";
+ const p=nearPOI();
+ let tip=p?"Pressione E — "+p.e+" "+p.n+(p.k==="posto"?" (R$ "+fmt(Math.ceil((100-G.fuel)*8))+")":""):"";
+ if(tip){c.fillStyle="#000b";c.fillRect(W/2-190,H-52,380,34);c.fillStyle="#ffd000";c.font="bold 16px Arial";c.fillText(tip,W/2,H-30)}
+ if(toastT>0){c.font="bold 15px Arial";const w=c.measureText(toastM).width+30;c.fillStyle="#000c";c.fillRect(W/2-w/2,14,w,34);c.fillStyle="#fff";c.fillText(toastM,W/2,36)}
+ if(paused){c.fillStyle="#0009";c.fillRect(0,0,W,H);c.fillStyle="#ffd000";c.font="bold 40px Arial";c.fillText("⏸ PAUSADO",W/2,H/2)}
 }
 
-game.money-=cost;
-
-game.fuel=100;
-
-updateHUD();
-
-save();
-
-alert(
-"⛽ Tanque abastecido!\n\nCusto: R$ "+
-money(cost)
-);
-
-}
-
-
-/* ================= MISSÃO RÁPIDA ================= */
-
-function goMission(){
-
-page("missoes");
-
-}
-
-
-/* ================= GARAGEM ================= */
-
+/* ============ GARAGEM / LOJA / OFICINA ============ */
+const bar=(l,v)=>`<p>${l}: ${v}</p><div class="bar"><i style="width:${Math.min(100,v)}%"></i></div>`;
 function renderGarage(){
-
-let div=
-document.getElementById("garageCards");
-
-div.innerHTML="";
-
-game.owned.forEach((v,i)=>{
-
-let selected=
-v.name===game.current.name;
-
-div.innerHTML+=`
-
-<div class="card ${selected?"selected":""}">
-
-<div class="vehicle">
-
-${v.emoji}
-
-</div>
-
-<h3>${v.name}</h3>
-
-<p>Tipo: ${v.type==="car"?"Carro":"Moto"}</p>
-
-<p>Potência: ${v.power}</p>
-
-<p>Velocidade: ${v.speed}</p>
-
-<p>Aderência: ${v.grip}</p>
-
-<button
-class="btn ${selected?"dark":""}"
-onclick="selectVehicle(${i})">
-
-${selected?"✅ Em uso":"🚗 Usar"}
-
-</button>
-
-</div>
-
-`;
-
-});
-
+ $("gc").textContent=G.owned.length+" veículo(s)";
+ $("garageCards").innerHTML=G.owned.map(n=>{
+  const v=veh(n),s=stat(v),sel=n===G.cur,i=V.indexOf(v);
+  return `<div class="card ${sel?"sel":""}"><div class="veh">${v.e}</div><h3>${v.n}</h3><p>${v.t==="car"?"Carro":"Moto"}</p>${bar("Potência",s.pw)}${bar("Velocidade",s.sp)}${bar("Aderência",s.gr)}<button class="btn ${sel?"dark":""}" onclick="useV(${i})">${sel?"✅ Em uso":"🚗 Usar"}</button></div>`;
+ }).join("");
 }
-
-
-function selectVehicle(index){
-
-game.current=
-game.owned[index];
-
-updateHUD();
-
-renderGarage();
-
-save();
-
-}
-
-
-/* ================= LOJA ================= */
-
+function useV(i){G.cur=V[i].n;hudUpdate();renderGarage();save()}
 function renderShop(){
-
-let cars=
-document.getElementById("carsShop");
-
-let bikes=
-document.getElementById("bikesShop");
-
-cars.innerHTML="";
-
-bikes.innerHTML="";
-
-vehicles.forEach((v,i)=>{
-
-let owned=
-game.owned.some(
-x=>x.name===v.name
-);
-
-let html=`
-
-<div class="card">
-
-<div class="vehicle">
-
-${v.emoji}
-
-</div>
-
-<h3>${v.name}</h3>
-
-<p>
-Potência: ${v.power}
-</p>
-
-<div class="bar">
-<i style="width:${v.power}%"></i>
-</div>
-
-<p>
-Velocidade: ${v.speed}
-</p>
-
-<div class="bar">
-<i style="width:${v.speed}%"></i>
-</div>
-
-<p>
-Aderência: ${v.grip}
-</p>
-
-<div class="bar">
-<i style="width:${v.grip}%"></i>
-</div>
-
-<p class="price">
-R$ ${money(v.price)}
-</p>
-
-<button
-class="btn ${owned?"dark":""}"
-onclick="buyVehicle(${i})">
-
-${owned?"✅ Comprado":"💰 Comprar"}
-
-</button>
-
-</div>
-
-`;
-
-if(v.type==="car")
-cars.innerHTML+=html;
-
-else
-bikes.innerHTML+=html;
-
-});
-
+ const html=t=>V.map((v,i)=>v.t!==t?"":`<div class="card"><div class="veh">${v.e}</div><h3>${v.n}</h3>${bar("Potência",v.pw)}${bar("Velocidade",v.sp)}${bar("Aderência",v.gr)}<p class="price">R$ ${fmt(v.p)}</p><button class="btn ${G.owned.includes(v.n)?"dark":""}" onclick="buyV(${i})">${G.owned.includes(v.n)?"✅ Comprado":"💰 Comprar"}</button></div>`).join("");
+ $("carsShop").innerHTML=html("car");$("bikesShop").innerHTML=html("bike");
+}
+function buyV(i){
+ const v=V[i];
+ if(G.owned.includes(v.n)){alert("Você já possui esse veículo.");return}
+ if(G.money<v.p){alert("💰 Dinheiro insuficiente! Você precisa de R$ "+fmt(v.p)+".");return}
+ G.money-=v.p;G.owned.push(v.n);hudUpdate();renderShop();save();
+ alert("🎉 Compra realizada! "+v.n+" está na sua garagem.");
+}
+const UP={engine:["⚙️","Motor","Mais potência e aceleração",10000],speed:["⚡","Velocidade","Aumenta a velocidade máxima",12000],tires:["🛞","Pneus","Melhora as curvas",8000],brakes:["🛑","Freios","Frenagem mais forte",7000],tank:["⛽","Tanque","Gasta menos combustível",6000]};
+function renderUp(){
+ const v=cur(),u=upg(v.n);$("upV").textContent=v.n;
+ $("upgrades").innerHTML=Object.keys(UP).map(k=>{
+  const d=UP[k],l=u[k],pr=d[3]*(l+1);
+  return `<div class="card"><h3>${d[0]} ${d[1]} <span style="color:#ffd000;float:right">${l}/5</span></h3><p>${d[2]}</p><div class="bar"><i style="width:${l*20}%"></i></div><p class="price">${l>=5?"Nível máximo":"R$ "+fmt(pr)}</p><button class="btn" ${l>=5?"disabled":""} onclick="buyUp('${k}')">${l>=5?"🏆 Máximo":"🔧 Melhorar"}</button></div>`;
+ }).join("");
+}
+function buyUp(k){
+ const u=upg(cur().n),l=u[k],pr=UP[k][3]*(l+1);
+ if(l>=5)return;
+ if(G.money<pr){alert("💰 Você não tem dinheiro suficiente.");return}
+ G.money-=pr;u[k]=l+1;hudUpdate();renderUp();save();
 }
 
-
-function buyVehicle(index){
-
-let v=vehicles[index];
-
-if(game.owned.some(
-x=>x.name===v.name
-)){
-
-alert("Você já possui esse veículo.");
-
-return;
-
-}
-
-if(game.money<v.price){
-
-alert(
-"💰 Dinheiro insuficiente!\n\n"+
-"Você precisa de R$ "+money(v.price)+"."
-);
-
-return;
-
-}
-
-game.money-=v.price;
-
-game.owned.push(v);
-
-alert(
-"🎉 Compra realizada!\n\n"+
-v.name+
-"\n\nAgora ele está na sua garagem."
-);
-
-updateHUD();
-
-renderShop();
-
-renderGarage();
-
-save();
-
-}
-
-
-/* ================= MELHORIAS ================= */
-
-const upgradeData={
-
-engine:{
-name:"Motor",
-icon:"⚙️",
-base:10000,
-desc:"Aumenta a potência."
-},
-
-speed:{
-name:"Velocidade",
-icon:"⚡",
-base:12000,
-desc:"Aumenta a velocidade máxima."
-},
-
-tires:{
-name:"Pneus",
-icon:"🛞",
-base:8000,
-desc:"Melhora a aderência."
-},
-
-brakes:{
-name:"Freios",
-icon:"🛑",
-base:7000,
-desc:"Melhora a frenagem."
-},
-
-tank:{
-name:"Tanque",
-icon:"⛽",
-base:6000,
-desc:"Aumenta a autonomia."
-}
-
-};
-
-
-function renderUpgrades(){
-
-let div=
-document.getElementById("upgrades");
-
-div.innerHTML="";
-
-Object.keys(upgradeData)
-.forEach(type=>{
-
-let u=
-upgradeData[type];
-
-let lvl=
-game.upgrades[type]||0;
-
-let price=
-u.base*(lvl+1);
-
-div.innerHTML+=`
-
-<div class="upgrade">
-
-<div class="upgradeTop">
-
-<h3>
-${u.icon} ${u.name}
-</h3>
-
-<span class="level">
-Nível ${lvl}/5
-</span>
-
-</div>
-
-<p style="color:#9caec0;margin:8px 0">
-${u.desc}
-</p>
-
-<div class="bar">
-
-<i style="width:${lvl*20}%"></i>
-
-</div>
-
-<p style="margin:8px 0">
-
-Custo:
-<b style="color:#ffd000">
-R$ ${money(price)}
-</b>
-
-</p>
-
-<button
-class="btn"
-onclick="upgrade('${type}')"
-${lvl>=5?"disabled":""}>
-
-${lvl>=5?"🏆 Máximo":"🔧 Melhorar"}
-
-</button>
-
-</div>
-
-`;
-
-});
-
-}
-
-
-function upgrade(type){
-
-let lvl=
-game.upgrades[type]||0;
-
-if(lvl>=5){
-
-alert("Essa melhoria já está no nível máximo.");
-
-return;
-
-}
-
-let price=
-upgradeData[type].base*(lvl+1);
-
-if(game.money<price){
-
-alert("💰 Você não tem dinheiro suficiente.");
-
-return;
-
-}
-
-game.money-=price;
-
-game.upgrades[type]=lvl+1;
-
-updateHUD();
-
-renderUpgrades();
-
-save();
-
-}
-
-
-/* ================= MISSÕES ================= */
-
-const missionData=[
-
-{
-title:"🚕 Viagem pela cidade",
-desc:"Dirija pelo mundo aberto e complete uma viagem.",
-reward:2500
-},
-
-{
-title:"📦 Entrega expressa",
-desc:"Leve uma encomenda até o ponto indicado.",
-reward:4000
-},
-
-{
-title:"🚦 Motorista responsável",
-desc:"Complete o desafio sem cometer infrações.",
-reward:5000
-},
-
-{
-title:"⛽ Viagem econômica",
-desc:"Chegue ao destino gastando pouco combustível.",
-reward:3500
-},
-
-{
-title:"🏁 Desafio de corrida",
-desc:"Vença uma corrida contra um robô.",
-reward:8000
-},
-
-{
-title:"🏆 Campeonato",
-desc:"Complete uma sequência de desafios.",
-reward:20000
-}
-
+/* ============ CORRIDAS ============ */
+const BOTS=[
+{n:"Rafael",car:"BMW M3",pw:65,c:"#1e88e5"},{n:"Luna",car:"Porsche 911",pw:83,c:"#eceff1"},
+{n:"Carlos",car:"Camaro",pw:76,c:"#fdd835"},{n:"Nina",car:"Kawasaki Ninja H2",pw:90,c:"#00e676",bike:1},
+{n:"Turbo",car:"Ducati Panigale V4",pw:94,c:"#ff1744",bike:1},{n:"Shadow",car:"McLaren P1",pw:96,c:"#fb8c00"}
 ];
-
-
-function renderMissions(){
-
-let div=
-document.getElementById("missions");
-
-div.innerHTML="";
-
-missionData.forEach((m,i)=>{
-
-div.innerHTML+=`
-
-<div class="mission">
-
-<div>
-
-<h3>${m.title}</h3>
-
-<p>${m.desc}</p>
-
-<div class="reward">
-💰 Recompensa: R$ ${money(m.reward)}
-</div>
-
-</div>
-
-<button
-class="btn"
-onclick="doMission(${i})">
-
-▶ Fazer
-
-</button>
-
-</div>
-
-`;
-
-});
-
+let mode="bot",bi=0,p2i=1,bet=500,R=null;
+const BETS=[500,1000,2500,5000,10000];
+$("p2sel").innerHTML=V.map((v,i)=>`<option value="${i}" ${i===p2i?"selected":""}>${v.n}</option>`).join("");
+function setMode(m){if(R&&!R.over)return;mode=m;refreshRace()}
+function pickBot(i){if(R&&!R.over)return;bi=i;refreshRace()}
+function setBet(b){if(R&&!R.over)return;bet=b;refreshRace()}
+function racerB(){
+ if(mode==="bot"){const b=BOTS[bi];return{name:b.n,car:b.car,pw:b.pw,c:b.c,bike:b.bike,bot:1}}
+ const v=V[p2i];return{name:"JOGADOR 2",car:v.n,pw:v.pw,c:v.c,bike:v.t==="bike"}
 }
-
-
-function doMission(index){
-
-let m=
-missionData[index];
-
-let success=
-Math.random()>.18;
-
-if(!success){
-
-alert(
-"❌ Missão não concluída!\n\n"+
-"Tente novamente."
-);
-
-return;
-
+function refreshRace(){
+ const v=cur(),s=stat(v),b=racerB();
+ $("mBot").className="btn "+(mode==="bot"?"":"dark");$("m2p").className="btn "+(mode==="2p"?"":"dark");
+ $("botBox").style.display=mode==="bot"?"block":"none";$("p2Box").style.display=mode==="2p"?"block":"none";
+ $("botList").innerHTML=BOTS.map((r,i)=>`<button class="btn dark ${i===bi?"on":""}" onclick="pickBot(${i})">🤖 ${r.n} • ${r.pw}</button>`).join("");
+ $("betList").innerHTML=BETS.map(x=>`<button class="btn dark ${x===bet?"on":""}" onclick="setBet(${x})">R$ ${fmt(x)}</button>`).join("");
+ $("betV").textContent=fmt(bet);
+ $("nA").textContent=mode==="2p"?"JOGADOR 1":"VOCÊ";$("cA").textContent=v.n;$("pA").textContent=s.pw;$("kA").textContent="Tecla: W";
+ $("nB").textContent=b.name.toUpperCase();$("cB").textContent=b.car;$("pB").textContent=b.pw;
+ $("iB").textContent=mode==="bot"?"🤖":"👤";$("kB").textContent=mode==="2p"?"Tecla: ↑":"";
+ $("goBtn").disabled=!!(R&&!R.over);
 }
-
-game.money+=m.reward;
-
-game.missionsDone++;
-
-if(
-game.missionsDone%3===0
-)game.level++;
-
-alert(
-"✅ MISSÃO CONCLUÍDA!\n\n"+
-m.title+
-"\n\n"+
-"💰 +R$ "+money(m.reward)
-);
-
-updateHUD();
-
-save();
-
-renderMissions();
-
-}
-
-
-/* ================= CORRIDAS ================= */
-
-const robots=[
-
-{
-name:"Rafael",
-car:"BMW M3",
-power:65
-},
-
-{
-name:"Luna",
-car:"Porsche 911",
-power:83
-},
-
-{
-name:"Carlos",
-car:"Camaro",
-power:76
-},
-
-{
-name:"Nina",
-car:"Kawasaki Ninja H2",
-power:90
-},
-
-{
-name:"Shadow",
-car:"McLaren P1",
-power:96
-},
-
-{
-name:"Turbo",
-car:"Ducati Panigale V4",
-power:94
-}
-
-];
-
-
-let opponent=
-robots[0];
-
-let betValue=500;
-
-let raceActive=false;
-
-let raceFrame=0;
-
-let playerRaceX=150;
-
-let robotRaceX=150;
-
-
-/* ================= PREPARAR CORRIDA ================= */
-
-function prepareRace(){
-
-document.getElementById(
-"raceYourCar"
-).textContent=
-game.current.name;
-
-document.getElementById(
-"yourPower"
-).textContent=
-getPower();
-
-newOpponent();
-
-}
-
-
-function getPower(){
-
-let base=
-game.current.power;
-
-base+=
-(game.upgrades.engine||0)*5;
-
-base+=
-(game.upgrades.speed||0)*3;
-
-return Math.min(110,base);
-
-}
-
-
-function newOpponent(){
-
-opponent=
-robots[
-Math.floor(
-Math.random()*robots.length
-)
-];
-
-document.getElementById(
-"robotName"
-).textContent=
-opponent.name;
-
-document.getElementById(
-"robotCar"
-).textContent=
-opponent.car;
-
-document.getElementById(
-"robotPower"
-).textContent=
-opponent.power;
-
-document.getElementById(
-"raceResult"
-).style.display="none";
-
-}
-
-
-function setBet(value){
-
-betValue=value;
-
-document.getElementById(
-"betValue"
-).textContent=
-money(value);
-
-}
-
-
-/* ================= CORRIDA ================= */
-
-const raceCanvas=
-document.getElementById("raceCanvas");
-
-const rctx=
-raceCanvas.getContext("2d");
-
-
 function startRace(){
-
-if(game.money<betValue){
-
-alert(
-"💰 Você não possui dinheiro suficiente para essa aposta."
-);
-
-return;
-
+ if(R&&!R.over)return;
+ if(G.money<bet){alert("💰 Você não tem dinheiro para essa aposta.");return}
+ G.money-=bet;save();hudUpdate();
+ const v=cur(),b=racerB();
+ const mk=(o)=>Object.assign({x:0,v:0,boost:0,stall:0,seed:Math.random()*9},o);
+ R={t:0,go:3+Math.random()*1.5,over:false,
+  a:mk({name:mode==="2p"?"Jogador 1":"Você",pw:stat(v).pw,c:v.c,bike:v.t==="bike"}),
+  b:mk({name:mode==="2p"?"Jogador 2":b.name,pw:b.pw,c:b.c,bike:b.bike,bot:mode==="bot"})};
+ $("res").style.display="none";refreshRace();
 }
-
-
-/*
-A aposta é retirada antes da corrida.
-Se vencer, recebe a aposta dos dois lados.
-*/
-
-game.money-=betValue;
-
-raceCanvas.style.display="block";
-
-document.getElementById(
-"raceResult"
-).style.display="none";
-
-raceActive=true;
-
-playerRaceX=100;
-
-robotRaceX=100;
-
-raceFrame=0;
-
-raceLoop();
-
-updateHUD();
-
+function newRace(){R=null;$("res").style.display="none";refreshRace()}
+function tap(r){
+ if(r.stall>0)return;
+ if(R.t<R.go){r.stall=1.2;r.boost=0;toast("",0)}
+ else r.boost=Math.min(28,r.boost+5);
 }
-
-
-/* ================= DESENHAR CORRIDA ================= */
-
+function stepRace(dt){
+ if(!R||R.over)return;
+ R.t+=dt;if(R.t<R.go)return;
+ const g=R.t-R.go;
+ for(const r of [R.a,R.b]){
+  if(r.stall>0){r.stall-=dt;r.v=0}
+  else if(r.bot){r.v=g<.35?0:25+r.pw*.55+12+9*Math.sin(g*2.7+r.seed)+(Math.random()-.5)*4}
+  else{r.boost=Math.max(0,r.boost-14*dt);r.v=25+r.pw*.55+r.boost}
+  r.x+=r.v*dt;
+ }
+ if(R.a.x>=1000||R.b.x>=1000){R.over=true;finishRace(R.a.x>=R.b.x)}
+}
+function finishRace(win){
+ const b=R.b;
+ if(win){G.money+=bet*2;G.wins++;lvl();$("rT").textContent="🏆 "+(mode==="2p"?"JOGADOR 1 VENCEU!":"VOCÊ VENCEU!");
+  $("rX").innerHTML=`Você derrotou <b>${b.name}</b>!<br>💰 Prêmio: <b style="color:#19d47b">+R$ ${fmt(bet)}</b> (aposta devolvida em dobro)`}
+ else{G.losses++;$("rT").textContent="💥 "+(mode==="2p"?"JOGADOR 2 VENCEU!":"VOCÊ PERDEU");
+  $("rX").innerHTML=`<b>${b.name}</b> venceu a corrida.<br>💸 Perdido: <b style="color:#ff4757">R$ ${fmt(bet)}</b><br>Melhore o veículo na oficina para a próxima.`}
+ $("rX").innerHTML+=`<br>💵 Saldo: <b>R$ ${fmt(G.money)}</b>`;
+ $("res").style.display="block";hudUpdate();save();refreshRace();
+}
+const rc=$("race").getContext("2d");
 function drawRace(){
-
-rctx.clearRect(
-0,0,
-1100,480
-);
-
-
-/* céu */
-
-rctx.fillStyle="#78c9ff";
-
-rctx.fillRect(
-0,0,
-1100,
-240
-);
-
-
-/* montanhas */
-
-rctx.fillStyle="#55756a";
-
-rctx.beginPath();
-
-rctx.moveTo(0,240);
-
-for(
-let x=0;
-x<=1100;
-x+=80
-){
-
-rctx.lineTo(
-x,
-170+Math.sin(x/100)*40
-);
-
+ const c=rc;
+ c.fillStyle="#7ccbff";c.fillRect(0,0,960,100);
+ c.fillStyle="#3f7044";c.fillRect(0,100,960,30);
+ c.fillStyle="#30343a";c.fillRect(0,130,960,200);
+ c.fillStyle="#fff";for(let x=0;x<960;x+=60)c.fillRect(x,228,34,5);
+ c.fillRect(0,130,960,4);c.fillRect(0,326,960,4);
+ c.fillRect(88,130,5,200);
+ for(let y=130;y<330;y+=20)for(let k=0;k<2;k++){c.fillStyle=((y/20+k)%2)?"#fff":"#111";c.fillRect(872+k*10,y,10,20)}
+ c.fillStyle="#111";c.fillRect(420,8,120,48);
+ c.textAlign="center";c.textBaseline="middle";
+ const n=!R?0:R.t>=R.go?3:Math.min(3,Math.floor(R.t)+1);
+ const go=R&&R.t>=R.go;
+ for(let i=0;i<3;i++){c.fillStyle=i<n?(go?"#19d47b":"#ff4757"):"#333";c.beginPath();c.arc(450+i*30,32,11,0,7);c.fill()}
+ c.font="bold 15px Arial";c.fillStyle="#fff";
+ c.fillText(!R?"Aguardando largada":R.over?"Fim!":go?"JÁ! Acelere!":"Espere o verde...",480,78);
+ const rs=R?[R.a,R.b]:[{x:0,c:cur().c,bike:cur().t==="bike",name:"Você",stall:0},{x:0,c:racerB().c,bike:racerB().bike,name:racerB().name,stall:0}];
+ rs.forEach((r,i)=>{
+  const y=180+i*96,x=115+Math.min(r.x,1000)*.75;
+  drawCar(c,x,y,0,r.c,r.bike);
+  c.font="bold 13px Arial";c.fillStyle="#fff";c.fillText(r.name+(r.stall>0?" 🚫 largou no vermelho!":""),x,y-30);
+ });
 }
 
-rctx.lineTo(
-1100,
-240
-);
+/* ============ TECLADO ============ */
+addEventListener("keydown",e=>{
+ if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.code)&&(active==="mundo"||active==="corrida"))e.preventDefault();
+ K[e.code]=true;
+ if(e.repeat)return;
+ if(active==="mundo"){if(e.code==="KeyE")interact();if(e.code==="KeyP")togglePause()}
+ else if(active==="corrida"&&R&&!R.over){
+  if(e.code==="KeyW")tap(R.a);
+  if(mode==="2p"&&e.code==="ArrowUp")tap(R.b);
+ }
+});
+addEventListener("keyup",e=>{K[e.code]=false});
+addEventListener("blur",()=>{for(const k in K)K[k]=false});
+addEventListener("beforeunload",save);
 
-rctx.fill();
-
-
-/* pista */
-
-rctx.fillStyle="#30343a";
-
-rctx.fillRect(
-0,
-240,
-1100,
-240
-);
-
-
-/* linhas */
-
-rctx.fillStyle="#fff";
-
-for(let x=0;x<1100;x+=70){
-
-rctx.fillRect(
-x,
-350,
-38,
-5
-);
-
+/* ============ LOOP PRINCIPAL ============ */
+let last=performance.now(),hudT=0;
+function loop(t){
+ now=t;const dt=Math.min(.05,(t-last)/1000);last=t;
+ if(toastT>0)toastT-=dt;
+ if(active==="mundo"){
+  if(!paused)stepWorld(dt);
+  drawWorld();
+  hudT+=dt;if(hudT>.2){hudT=0;hudUpdate()}
+ }else if(active==="corrida"){stepRace(dt);drawRace()}
+ requestAnimationFrame(loop);
 }
-
-
-/* chegada */
-
-rctx.fillStyle="#fff";
-
-for(let y=240;y<480;y+=40){
-
-rctx.fillRect(
-1000,
-y,
-25,
-20
-);
-
-}
-
-
-/* jogador */
-
-rctx.font="65px Arial";
-
-rctx.fillText(
-game.current.emoji,
-playerRaceX,
-330
-);
-
-
-/* robô */
-
-rctx.fillText(
-"🏎️",
-robotRaceX,
-430
-);
-
-
-/* nomes */
-
-rctx.fillStyle="#111";
-
-rctx.font="bold 18px Arial";
-
-rctx.fillText(
-"VOCÊ",
-playerRaceX,
-345
-);
-
-rctx.fillText(
-opponent.name,
-robotRaceX,
-445
-);
-
-}
-
-
-/* ================= LOOP CORRIDA ================= */
-
-function raceLoop(){
-
-if(!raceActive)return;
-
-raceFrame++;
-
-let yourSpeed=
-0.8+
-getPower()/100;
-
-let robotSpeed=
-0.8+
-opponent.power/100;
-
-
-/*
-pequena variação para não deixar
-o resultado sempre previsível
-*/
-
-yourSpeed+=
-(Math.random()-.5)*.22;
-
-robotSpeed+=
-(Math.random()-.5)*.22;
-
-playerRaceX+=yourSpeed;
-
-robotRaceX+=robotSpeed;
-
-drawRace();
-
-if(
-playerRaceX>=980||
-robotRaceX>=980
-){
-
-raceActive=false;
-
-finishRace(
-playerRaceX>=robotRaceX
-);
-
-return;
-
-}
-
-requestAnimationFrame(
-raceLoop
-);
-
-}
-
-
-/* ================= RESULTADO ================= */
-
-function finishRace(playerWon){
-
-let prize=
-betValue*2;
-
-let resultTitle=
-document.getElementById(
-"resultTitle"
-);
-
-let resultText=
-document.getElementById(
-"resultText"
-);
-
-if(playerWon){
-
-game.money+=prize;
-
-game.wins++;
-
-game.level=
-Math.max(
-game.level,
-1+Math.floor(game.wins/3)
-);
-
-resultTitle.textContent=
-"🏆 VOCÊ VENCEU!";
-
-resultText.innerHTML=
-`
-Você derrotou <b>${opponent.name}</b>!
-
-<br><br>
-
-🏎️ Seu veículo:
-<b>${game.current.name}</b>
-
-<br>
-
-💰 Prêmio:
-<b style="color:#19d47b">
-+R$ ${money(prize)}
-</b>
-
-<br><br>
-
-💵 Saldo atual:
-<b>R$ ${money(game.money)}</b>
-`;
-
-}else{
-
-game.losses++;
-
-resultTitle.textContent=
-"💥 VOCÊ PERDEU";
-
-resultText.innerHTML=
-`
-<b>${opponent.name}</b> venceu a corrida.
-
-<br><br>
-
-💸 Você perdeu:
-<b style="color:#ff4757">
-R$ ${money(betValue)}
-</b>
-
-<br><br>
-
-Tente melhorar seu veículo na oficina
-antes da próxima corrida.
-`;
-
-}
-
-document.getElementById(
-"raceResult"
-).style.display="block";
-
-updateHUD();
-
-save();
-
-}
-
-
-/* ================= REVANCHE ================= */
-
-function rematch(){
-
-document.getElementById(
-"raceResult"
-).style.display="none";
-
-startRace();
-
-}
-
-
-/* ================= NOVA CORRIDA ================= */
-
-function newRace(){
-
-newOpponent();
-
-document.getElementById(
-"raceResult"
-).style.display="none";
-
-raceCanvas.style.display="none";
-
-}
-
-
-/* ================= INICIALIZAÇÃO ================= */
-
-updateHUD();
-
-drawWorld();
-
-renderGarage();
-
-renderShop();
-
-renderMissions();
-
-renderUpgrades();
-
-
-/* ================= AUTOSAVE ================= */
-
-setInterval(
-save,
-5000
-);
-
+lvl();hudUpdate();refreshRace();
+setInterval(save,5000);
+requestAnimationFrame(loop);
 </script>
  <a class="btn btn-primary" href="deficienciia.html">DEFICIENCIA</a>
 </body>
