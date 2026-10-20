@@ -5,13 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Meu Feriado e Minha Volta às Aulas</title>
+    <title>Meu Feriado e Minha Semana das Crianças</title>
 
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -25,12 +29,12 @@
             background: linear-gradient(135deg, #d98bb5, #a66bb5);
             color: white;
             text-align: center;
-            padding: 50px 20px;
+            padding: 55px 20px;
         }
 
         header h1 {
             font-size: 32px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         header p {
@@ -39,7 +43,7 @@
 
         nav {
             background-color: white;
-            padding: 15px;
+            padding: 16px 10px;
             text-align: center;
             box-shadow: 0 2px 8px #00000010;
         }
@@ -57,22 +61,38 @@
         }
 
         main {
-            max-width: 900px;
-            margin: 30px auto;
+            max-width: 950px;
+            margin: 35px auto;
             padding: 0 20px;
+        }
+
+        .introducao {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 10px;
+        }
+
+        .introducao h2 {
+            color: #a64d79;
+            margin-bottom: 10px;
         }
 
         section {
             background-color: white;
-            padding: 25px;
-            margin-bottom: 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px #00000010;
+            padding: 28px;
+            margin-bottom: 28px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px #0000000d;
         }
 
         h2 {
             color: #b45b8b;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
+        }
+
+        h3 {
+            color: #a66bb5;
+            margin: 20px 0 10px;
         }
 
         p {
@@ -83,8 +103,29 @@
         .destaque {
             background-color: #fce4ec;
             border-left: 5px solid #d98bb5;
-            padding: 15px;
+            padding: 17px;
             border-radius: 8px;
+            margin-top: 18px;
+        }
+
+        .dia {
+            border-bottom: 1px solid #f1d6e4;
+            padding: 12px 0;
+        }
+
+        .dia:last-child {
+            border-bottom: none;
+        }
+
+        .data {
+            color: #a64d79;
+            font-weight: bold;
+        }
+
+        .orcamento {
+            background-color: #f8eafa;
+            padding: 18px;
+            border-radius: 10px;
             margin-top: 15px;
         }
 
@@ -92,8 +133,8 @@
             background-color: #a66bb5;
             color: white;
             text-align: center;
-            padding: 25px;
-            margin-top: 35px;
+            padding: 28px 15px;
+            margin-top: 40px;
         }
 
         footer p {
@@ -109,6 +150,10 @@
             section {
                 padding: 20px;
             }
+
+            nav a {
+                margin: 5px 8px;
+            }
         }
     </style>
 </head>
@@ -116,26 +161,40 @@
 <body>
 
     <header>
-        <h1>Meu Feriado e Minha Volta às Aulas 🌸</h1>
-        <p>Um pouco sobre meus dias de descanso e minha volta à rotina escolar.</p>
+        <h1>🌸 Meu Feriado e Minha Semana das Crianças</h1>
+        <p>Minhas lembranças, meus passeios e meus planos para 2027.</p>
     </header>
 
     <nav>
         <a href="#feriado">Meu Feriado</a>
         <a href="#familia">Momentos em Família</a>
         <a href="#volta">Volta às Aulas</a>
+        <a href="#criancas">Semana das Crianças 2027</a>
     </nav>
 
     <main>
+
+        <div class="introducao">
+            <h2>Bem-vindos ao meu cantinho! 💗</h2>
+            <p>
+                Neste site, vou contar como foi minha semana de feriado
+                escolar e meu retorno às aulas. Também vou compartilhar
+                meu planejamento para a Semana das Crianças de 2027,
+                com ideias de passeios, jogos e diversão em família.
+            </p>
+        </div>
+
+        <!-- MEU FERIADO -->
 
         <section id="feriado">
             <h2>🌷 Como foi minha semana de feriado?</h2>
 
             <p>
-                Durante minha semana de feriado escolar, fiquei praticamente
-                a semana toda em Alvarenga. Aproveitei esses dias para passear,
-                visitar vários lugares e conhecer um pouco mais a região.
-                Também nadei na lagoa e aproveitei bastante o tempo que passei lá.
+                Durante minha semana de feriado escolar, fiquei
+                praticamente a semana toda em Alvarenga. Aproveitei
+                esses dias para passear, visitar vários lugares e
+                conhecer um pouco mais a região. Também nadei na
+                lagoa e aproveitei bastante o tempo que passei lá.
             </p>
 
             <p>
@@ -144,51 +203,54 @@
             </p>
         </section>
 
+        <!-- MOMENTOS EM FAMÍLIA -->
+
         <section id="familia">
             <h2>🎲 Jogos e momentos em família</h2>
 
             <p>
-                Durante o feriado, tive momentos divertidos jogando dama,
-                baralho e dominó com meu padrasto, os parentes dele,
-                meu irmão e minha irmã. Também fui a um bar perto de
-                Alvarenga, ou talvez dentro da própria cidade, onde
-                jogamos sinuca e nos divertimos bastante.
+                Durante o feriado, tive momentos divertidos jogando
+                dama, baralho e dominó com meu padrasto, os parentes
+                dele, meu irmão e minha irmã. Também fui a um bar
+                perto de Alvarenga, ou talvez dentro da própria cidade,
+                onde jogamos sinuca e nos divertimos bastante.
             </p>
 
             <p>
                 No sábado, demos uma passada em outro bairro próximo
-                para visitar alguns parentes meus que eu ainda não conhecia.
-                Foi uma oportunidade de conhecer pessoas da minha família.
+                para visitar alguns parentes meus que eu ainda não
+                conhecia. Foi uma oportunidade de conhecer pessoas
+                da minha família.
             </p>
 
             <div class="destaque">
-                Foi muito bom aproveitar o tempo livre, jogar com a família
-                e conhecer pessoas e lugares novos!
+                Foi muito bom aproveitar o tempo livre, jogar com
+                minha família e conhecer pessoas e lugares novos!
             </div>
         </section>
 
+        <!-- VOLTA ÀS AULAS -->
+
         <section id="volta">
-            <h2>🎂 Domingo, meu aniversário!</h2>
+            <h2>🎂 Meu aniversário e minha volta às aulas</h2>
 
             <p>
                 No domingo, chegou a hora de voltar para casa.
                 No caminho, passamos por Iapu para visitar minha irmã.
-                Além disso, domingo foi meu aniversário!
-                Depois da visita, seguimos viagem de volta para casa.
-            </p>
-
-            <h2>📚 Minha volta às aulas</h2>
-
-            <p>
-                Na segunda-feira, acabei faltando à aula.
-                Já nesta terça-feira, voltei para a escola, mas estou
-                com muito sono e tendo que estudar mesmo assim.
+                Além disso, domingo foi meu aniversário! Depois da
+                visita, seguimos viagem de volta para casa.
             </p>
 
             <p>
-                Depois de tantos dias diferentes e de descanso,
-                voltar à rotina escolar está sendo um pouco difícil,
-                principalmente por causa do sono!
+                Na segunda-feira, acabei faltando à aula. Já na terça-feira,
+                voltei para a escola, mas estava com muito sono e tendo
+                que estudar mesmo assim.
+            </p>
+
+            <p>
+                Depois de tantos dias diferentes e de descanso, voltar
+                à rotina escolar foi um pouco difícil, principalmente
+                por causa do sono!
             </p>
 
             <div class="destaque">
@@ -197,15 +259,139 @@
             </div>
         </section>
 
+        <!-- SEMANA DAS CRIANÇAS 2027 -->
+
+        <section id="criancas">
+            <h2>🎉 Minha Semana das Crianças de 2027</h2>
+
+            <p>
+                Para outubro de 2027, quero planejar uma semana
+                divertida com minha família, aproveitando o tempo
+                livre sem gastar muito dinheiro. Quero passear,
+                conhecer lugares novos, jogar, assistir a filmes
+                e comer coisas gostosas.
+            </p>
+
+            <div class="dia">
+                <h3>🎮 Sábado, 9 de outubro — Jogos e diversão</h3>
+
+                <p>
+                    No sábado, pretendo dormir um pouco mais e
+                    aproveitar o dia com minha família. Durante a
+                    tarde, quero jogar dama, baralho e dominó com eles.
+                    À noite, podemos preparar pipoca, assistir a um
+                    filme e descansar.
+                </p>
+            </div>
+
+            <div class="dia">
+                <h3>🌳 Domingo, 10 de outubro — Passeio em família</h3>
+
+                <p>
+                    No domingo, quero fazer um passeio com minha família,
+                    conhecer uma praça, um parque ou algum lugar diferente.
+                    Podemos levar lanches de casa e fazer um piquenique
+                    para economizar dinheiro. Depois, quero aproveitar
+                    o restante do dia descansando e mexendo no celular.
+                </p>
+            </div>
+
+            <div class="dia">
+                <h3>🏊 Segunda-feira, 11 de outubro — Lagoa ou piscina</h3>
+
+                <p>
+                    Na segunda-feira, pretendo aproveitar o dia para
+                    visitar uma lagoa ou piscina com minha família,
+                    caso tenhamos uma opção acessível e segura.
+                    Quero aproveitar a natureza, tirar algumas fotos
+                    e me divertir. Quando voltar para casa, pretendo
+                    descansar e assistir a vídeos ou séries.
+                </p>
+            </div>
+
+            <div class="dia">
+                <h3>🎉 Terça-feira, 12 de outubro — Dia das Crianças</h3>
+
+                <p>
+                    Na terça-feira, Dia das Crianças, quero ter um
+                    dia especial com minha família. Pretendo tomar
+                    um café da manhã diferente, aproveitar um almoço
+                    gostoso e passar a tarde jogando e conversando
+                    com eles. À noite, podemos preparar um lanche
+                    em casa e assistir a um filme.
+                </p>
+            </div>
+
+            <div class="dia">
+                <h3>🗺️ Quarta-feira, 13 de outubro — Lugares novos</h3>
+
+                <p>
+                    Na quarta-feira, gostaria de conhecer algum lugar
+                    que ainda não visitei, como uma praça, um bairro
+                    ou uma cidade próxima. Quero passear com minha
+                    família, tirar fotos e aproveitar o dia. Se possível,
+                    também podemos comprar um lanche barato durante
+                    o passeio.
+                </p>
+            </div>
+
+            <div class="dia">
+                <h3>🎱 Quinta-feira, 14 de outubro — Jogos e lanches</h3>
+
+                <p>
+                    Na quinta-feira, quero aproveitar o tempo livre
+                    em casa, mexer no celular e assistir a filmes ou
+                    séries. Durante a tarde, posso jogar dama, baralho
+                    e dominó com minha família ou, se tivermos dinheiro
+                    disponível, ir a algum lugar para jogar sinuca.
+                    À noite, podemos preparar um lanche e conversar.
+                </p>
+            </div>
+
+            <div class="dia">
+                <h3>🍿 Sexta-feira, 15 de outubro — Encerrando a semana</h3>
+
+                <p>
+                    Na sexta-feira, pretendo descansar e aproveitar
+                    meu último dia desse planejamento especial.
+                    Quero repetir alguma atividade de que gostei
+                    durante a semana, assistir a filmes, comer alguma
+                    coisa gostosa e passar um tempo com minha família.
+                </p>
+            </div>
+
+            <div class="orcamento">
+                <h3>💰 Meu planejamento para gastar pouco</h3>
+
+                <p>
+                    Quero economizar durante a semana, dando preferência
+                    a passeios gratuitos, jogos em casa, lanches preparados
+                    com minha família e lugares que não exijam muito
+                    dinheiro. Assim, poderei me divertir sem precisar
+                    gastar muito.
+                </p>
+            </div>
+
+            <div class="destaque">
+                <h3>💕 Minha expectativa</h3>
+
+                <p>
+                    Espero que minha Semana das Crianças de 2027 seja
+                    cheia de diversão, passeios, jogos e momentos especiais
+                    com minha família. Quero conhecer lugares novos,
+                    aproveitar meu tempo livre e criar boas lembranças
+                    com as pessoas que fazem parte da minha vida.
+                </p>
+            </div>
+        </section>
+
     </main>
 
     <footer>
-        <p>Meu feriado, minhas lembranças e um novo começo! 💕</p>
+        <p>🌸 Minhas lembranças, meus planos e novos momentos especiais!</p>
         <p>Trabalho de Programação Web</p>
         <p>Nome: Katielly | Turma: 2º EMTI</p>
     </footer>
 
-</script>
- <a class="btn btn-primary" href="deficienciia.html">NOT.PAD.BOTAO</a>
 </body>
 </html>
